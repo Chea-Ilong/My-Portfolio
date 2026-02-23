@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
                 allow: '/',
             },
         ],
-        sitemap: 'https://cheailong.vercel.app/sitemap.xml',
+        sitemap: 'https://cheailong.dev/sitemap.xml',
     }
 }

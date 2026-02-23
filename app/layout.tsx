@@ -9,7 +9,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 /* ───────────────────────────────── SEO ───────────────────────────────── */
 
-const siteUrl = 'https://cheailong.vercel.app';
+const siteUrl = 'https://cheailong.dev';
 const siteName = 'Chea Ilong — Full-Stack Developer';
 const siteDescription =
   'Portfolio of Chea Ilong, a Full-Stack Developer specializing in React, Next.js, TypeScript, and modern web technologies. Explore projects like AUREA and PhsarDesign, and learn about my experience in startup innovation and product development.';
