@@ -4,8 +4,20 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+        pathname: '/devicons/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.vectorlogo.zone',
+        pathname: '/logos/**',
+      },
+    ],
   },
 }
 
 export default nextConfig
+
