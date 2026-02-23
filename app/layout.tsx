@@ -133,24 +133,47 @@ export const metadata: Metadata = {
 
 /* ──────────────────────── JSON-LD Structured Data ────────────────────── */
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Chea Ilong',
-  url: siteUrl,
-  image: `${siteUrl}/mypic.png`,
-  jobTitle: 'Full-Stack Developer',
-  description: siteDescription,
-  sameAs: [
-    'https://github.com/Chea-Ilong',
-    'https://www.linkedin.com/in/chea-ilong-88bb83333/',
-    'https://t.me/Chea_Ilong',
-  ],
-  knowsAbout: [
-    'React', 'Next.js', 'TypeScript', 'JavaScript', 'Node.js',
-    'PostgreSQL', 'MongoDB', 'Docker', 'Full-Stack Development',
-  ],
-};
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Chea Ilong',
+    alternateName: ['Ilong Chea', 'cheailong', 'Chea ilong', 'chea ilong', 'Chea-Ilong'],
+    url: siteUrl,
+    image: `${siteUrl}/mypic.png`,
+    jobTitle: 'Full-Stack Developer',
+    description: siteDescription,
+    nationality: {
+      '@type': 'Country',
+      name: 'Cambodia',
+    },
+    alumniOf: {
+      '@type': 'EducationalOrganization',
+      name: 'Cambodia Academy of Digital Technology (CADT)',
+      url: 'https://www.cadt.edu.kh',
+    },
+    sameAs: [
+      'https://github.com/Chea-Ilong',
+      'https://www.linkedin.com/in/chea-ilong-88bb83333/',
+      'https://t.me/Chea_Ilong',
+    ],
+    knowsAbout: [
+      'React', 'Next.js', 'TypeScript', 'JavaScript', 'Node.js',
+      'PostgreSQL', 'MongoDB', 'Docker', 'Full-Stack Development',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Chea Ilong — Full-Stack Developer Portfolio',
+    url: siteUrl,
+    description: siteDescription,
+    author: {
+      '@type': 'Person',
+      name: 'Chea Ilong',
+    },
+  },
+];
 
 /* ─────────────────────────── Root Layout ─────────────────────────────── */
 
