@@ -62,6 +62,15 @@ const experiences = [
 
 const projects = [
   {
+    title: 'LeakScope',
+    description: 'LeakScope is an automated black-box security scanner that audits live Supabase applications for vulnerabilities by analyzing publicly exposed assets without requiring credentials. Engineered detection for leaked API keys, exposed database tables, broken Row Level Security policies, IDOR/BOLA vulnerabilities, and sensitive data leaks in endpoints and storage buckets.',
+    tags: ['Next.js', 'React', 'TailwindCSS', 'TypeScript', 'PostgreSQL'],
+    year: '2026',
+    link: 'https://www.leakscope.tech/',
+    highlights: 'One URL. Full audit path.',
+    image: '/leakscope.png',
+  },
+  {
     title: 'AUREA',
     description: 'An easy, fast, and efficient website builder designed for creatives to build stunning portfolios with a flexible template system. AUREA removes the hassle of website setup, saves time, and lets designers focus on their craft instead of technical complexities.',
     tags: ['Next.js', 'React', 'TailwindCSS', 'TypeScript', 'PostgreSQL'],
@@ -164,7 +173,7 @@ export default function Home() {
     <div className="bg-background text-foreground antialiased">
       <main>
         {/* Navigation */}
-        <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-xl border-b border-border/40">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-muted/30 backdrop-blur-xl border-b border-border/40">
           <nav className="max-w-6xl mx-auto px-6 sm:px-8 py-4 flex items-center justify-between">
             <a href="#" className="text-base font-light tracking-tight hover:opacity-60 transition-opacity">
               Chea Ilong
@@ -178,7 +187,7 @@ export default function Home() {
                     href={item.href}
                     className={`text-sm font-light transition-opacity duration-200 ${isActive
                         ? 'text-foreground opacity-100'
-                        : 'text-muted-foreground opacity-60 hover:opacity-100'
+                        : 'text-foreground/70 hover:text-foreground'
                       }`}
                   >
                     {item.label}
@@ -190,7 +199,8 @@ export default function Home() {
         </header>
 
         {/* Hero Section with Profile */}
-        <section className="pt-48 pb-48 px-6 sm:px-8 max-w-6xl mx-auto">
+        <section className="bg-muted/30 -mx-6 px-6 pt-48 pb-48 sm:-mx-8 sm:px-8">
+          <div className="mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <div className="space-y-12">
               <div className="space-y-8">
@@ -199,7 +209,7 @@ export default function Home() {
                   Hi, I'm <br /> Chea  Ilong
                 </h1>
               </div>
-              <p className="text-lg text-muted-foreground/80 font-light leading-relaxed max-w-lg">
+              <p className="text-lg text-foreground/75 font-light leading-relaxed max-w-lg">
                 A dedicated Software Engineer crafting elegant digital solutions. I specialize in full-stack development, startup innovation, and turning ideas into deployable products.
               </p>
               <div className="flex gap-4 pt-6">
@@ -232,42 +242,37 @@ export default function Home() {
               </div>
             </div>
           </div>
+          </div>
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-48 px-6 sm:px-8 max-w-6xl mx-auto">
-          <div className="space-y-16">
-            <div className="text-center">
-              <h2 className="text-5xl sm:text-6xl font-light tracking-tight text-foreground">About me</h2>
+        <section id="about" className="bg-muted/30 -mx-6 px-6 py-32 sm:-mx-8 sm:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div data-reveal className="section-shell reveal-item">
+            <div className="section-heading-wrap space-y-6">
+              <p className="section-kicker">About</p>
+              <h2 className="section-heading">Engineering with product thinking</h2>
             </div>
-            <div className="max-w-3xl mx-auto space-y-8 text-base leading-relaxed">
-              <p className="text-foreground/85 font-light text-lg">
-                I'm a dedicated Software Engineer with strong experience in <span className="text-foreground font-medium">full-stack development</span>, <span className="text-foreground font-medium">startup innovation</span>, and technical project execution. I have hands-on experience building production-ready systems and contributing to real-world products.
+            <div className="grid gap-12 md:grid-cols-2 pt-12">
+              <p className="max-w-xl text-foreground/70">
+                I have hands-on experience in full-stack development, startup execution, and technical leadership.
+                I build systems that are practical to maintain and easy for users to trust.
               </p>
-              <p className="text-foreground/85 font-light text-lg">
-                I'm skilled in <span className="text-foreground font-medium">project coordination</span>, <span className="text-foreground font-medium">program execution</span>, and <span className="text-foreground font-medium">peer education</span>, with a strong ability to turn ideas into deployable solutions. Through initiatives like AUREA, I've demonstrated my commitment to teamwork, problem-solving, and creating impactful digital products.
-              </p>
-              <div className="space-y-4 pt-4 border-t border-border/20">
-                <div>
-                  <p className="text-sm text-muted-foreground/60 font-medium uppercase tracking-wider mb-2">Currently working on</p>
-                  <p className="text-foreground/85 font-medium">AUREA — Fee Estimator for Freelance Designers</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground/60 font-medium uppercase tracking-wider mb-2">Learning</p>
-                  <p className="text-foreground/85 font-medium">Software Development, Cloud Computing (AWS)</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground/60 font-medium uppercase tracking-wider mb-2">Open to</p>
-                  <p className="text-foreground/85 font-medium">Software development collaborations, innovative tech solutions</p>
-                </div>
+              <div className="space-y-6 rounded-2xl border border-border/70 bg-card p-8">
+                <p className="text-sm text-foreground/80">Currently working on</p>
+                <p className="font-medium">AUREA - Fee Estimator for Freelance Designers</p>
+                <p className="pt-4 text-sm text-foreground/80">Learning</p>
+                <p className="font-medium">Software development and AWS cloud fundamentals</p>
               </div>
             </div>
+          </div>
           </div>
         </section>
 
         {/* Experience Section */}
-        <section id="experience" className="py-48 px-6 sm:px-8 max-w-6xl mx-auto">
-          <div className="space-y-16">
+        <section id="experience" className="bg-muted/30 -mx-6 px-6 py-48 sm:-mx-8 sm:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="space-y-16">
             <div className="text-center">
               <h2 className="text-5xl sm:text-6xl font-light tracking-tight text-foreground">Experience</h2>
             </div>
@@ -294,7 +299,7 @@ export default function Home() {
                           <span className="text-sm text-muted-foreground font-medium tracking-wide uppercase whitespace-nowrap">{exp.period}</span>
                         </div>
                         <p className="text-base text-foreground/75 font-medium">{exp.role}</p>
-                        <p className="text-base text-muted-foreground/80 leading-relaxed font-light">
+                        <p className="text-base text-foreground/75 leading-relaxed font-light">
                           {exp.description}
                         </p>
                         <div className="flex flex-wrap gap-2 pt-2">
@@ -325,11 +330,13 @@ export default function Home() {
               </div>
             </div>
           </div>
+          </div>
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="py-48 px-6 sm:px-8 max-w-6xl mx-auto">
-          <div className="space-y-16">
+        <section id="skills" className="bg-muted/30 -mx-6 px-6 py-48 sm:-mx-8 sm:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="space-y-16">
             <div className="text-center">
               <h2 className="text-5xl sm:text-6xl font-light tracking-tight text-foreground">Skills</h2>
             </div>
@@ -344,7 +351,7 @@ export default function Home() {
                         href={skill.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-6 p-7 rounded-2xl hover:bg-muted/40 border border-transparent hover:border-border/40 transition-all group/skill"
+                        className="flex items-center gap-6 p-6 rounded-2xl hover:bg-muted/40 border border-transparent hover:border-border/40 transition-all group/skill"
                       >
                         <Image
                           src={skill.icon}
@@ -354,7 +361,7 @@ export default function Home() {
                           className="w-8 h-8 shrink-0 object-contain"
                           loading="lazy"
                         />
-                        <span className="text-xl font-light text-muted-foreground/90 group-hover/skill:text-foreground transition-colors">
+                        <span className="text-base font-light text-foreground/80 group-hover/skill:text-foreground transition-colors">
                           {skill.name}
                         </span>
                       </a>
@@ -364,78 +371,122 @@ export default function Home() {
               ))}
             </div>
           </div>
+          </div>
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-48 px-6 sm:px-8 max-w-6xl mx-auto">
-          <div className="space-y-16">
-            <div className="text-center">
-              <h2 className="text-5xl sm:text-6xl font-light tracking-tight text-foreground">Projects</h2>
-            </div>
-            <div className="max-w-4xl mx-auto space-y-8">
-              {projects.map((project, index) => (
-                <a
-                  key={index}
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block border border-border/20 rounded-3xl hover:border-foreground/20 hover:shadow-2xl hover:shadow-foreground/5 transition-all overflow-hidden"
-                >
-                  {/* Project Image */}
-                  <div className="relative w-full h-72 bg-muted/20 flex items-center justify-center border-b border-border/10 overflow-hidden">
-                    {project.image ? (
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 896px"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="text-center space-y-3">
-                        <div className="w-20 h-20 mx-auto bg-muted/40 rounded-2xl flex items-center justify-center">
-                          <Code2 className="w-10 h-10 text-muted-foreground/50" />
+        <section id="projects" className="bg-muted/30 -mx-6 px-6 py-48 sm:-mx-8 sm:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="space-y-16">
+              <div className="text-center">
+                <h2 className="text-5xl sm:text-6xl font-light tracking-tight text-foreground">Projects</h2>
+              </div>
+              <div className="space-y-24">
+                {projects.map((project, index) => (
+                  <a
+                    key={index}
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block rounded-2xl bg-muted/10 hover:bg-muted/30 hover:shadow-lg hover:scale-[1.02] transition-all p-8"
+                  >
+                    <div className="grid md:grid-cols-2 gap-12 items-center">
+                    {/* Alternate layout: image first on even, content first on odd */}
+                    {index % 2 === 0 ? (
+                      <>
+                        {/* Image Column */}
+                        <div className="relative h-80 bg-muted/20 rounded-3xl overflow-hidden border border-border/20">
+                          {project.image ? (
+                            <Image
+                              src={project.image}
+                              alt={project.title}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, 400px"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <Code2 className="w-12 h-12 text-muted-foreground/30" />
+                            </div>
+                          )}
                         </div>
-                        <p className="text-sm text-muted-foreground/50 font-light">Project Preview</p>
-                      </div>
-                    )}
-                  </div>
 
-                  {/* Project Content */}
-                  <div className="p-10">
-                    <div className="flex items-start justify-between mb-6">
-                      <h3 className="text-3xl font-medium tracking-tight text-foreground group-hover:text-foreground transition-colors">
-                        {project.title}
-                      </h3>
-                      <ExternalLink className="w-6 h-6 text-muted-foreground/40 group-hover:text-foreground/60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all flex-shrink-0" />
+                        {/* Content Column */}
+                        <div className="space-y-6">
+                          <p className="text-sm text-foreground/70 font-medium">{project.year}</p>
+                          <h3 className="text-4xl font-semibold tracking-tight text-foreground">{project.title}</h3>
+                          <p className="text-lg text-foreground/80 leading-relaxed">{project.description}</p>
+                          <div className="flex flex-wrap gap-3">
+                            {project.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="px-3 py-1 text-sm font-light text-foreground/70 bg-transparent border border-border/50 rounded-full"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          <div className="flex items-center justify-between pt-4">
+                            <p className="text-base text-foreground/75">{project.highlights}</p>
+                            <span className="text-sm font-medium text-foreground group-hover:underline transition-colors">Open project</span>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        {/* Content Column (Reversed) */}
+                        <div className="space-y-6 order-2 md:order-1">
+                          <p className="text-sm text-foreground/70 font-medium">{project.year}</p>
+                          <h3 className="text-4xl font-semibold tracking-tight text-foreground">{project.title}</h3>
+                          <p className="text-lg text-foreground/80 leading-relaxed">{project.description}</p>
+                          <div className="flex flex-wrap gap-3">
+                            {project.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="px-3 py-1 text-sm font-light text-foreground/70 bg-transparent border border-border/50 rounded-full"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          <div className="flex items-center justify-between pt-4">
+                            <p className="text-base text-foreground/75">{project.highlights}</p>
+                            <span className="text-sm font-medium text-foreground group-hover:underline transition-colors">Open project</span>
+                          </div>
+                        </div>
+
+                        {/* Image Column (Reversed) */}
+                        <div className="relative h-80 bg-muted/20 rounded-3xl overflow-hidden border border-border/20 order-1 md:order-2">
+                          {project.image ? (
+                            <Image
+                              src={project.image}
+                              alt={project.title}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, 400px"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <Code2 className="w-12 h-12 text-muted-foreground/30" />
+                            </div>
+                          )}
+                        </div>
+                      </>
+                    )}
                     </div>
-                    <p className="text-muted-foreground/80 mb-8 leading-relaxed font-light text-lg max-w-2xl">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                      <div className="flex flex-wrap gap-3">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-4 py-2 text-sm font-light text-muted-foreground/70 bg-muted/30 rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <span className="text-base text-foreground/85 font-medium whitespace-nowrap">{project.highlights}</span>
-                    </div>
-                  </div>
-                </a>
-              ))}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-48 px-6 sm:px-8 max-w-6xl mx-auto">
-          <div className="space-y-16">
+        <section id="contact" className="bg-muted/30 -mx-6 px-6 py-48 sm:-mx-8 sm:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="space-y-16">
             <div className="text-center">
               <h2 className="text-5xl sm:text-6xl font-light tracking-tight text-foreground">Get in touch</h2>
             </div>
@@ -446,13 +497,13 @@ export default function Home() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <a
                   href="mailto:cheadara133@gmail.com"
-                  className="flex items-center gap-4 p-6 border border-border/30 rounded-3xl hover:border-foreground/30 hover:bg-muted/20 hover:shadow-lg hover:shadow-foreground/5 transition-all group"
+                  className="flex items-center gap-4 p-6 border border-border/50 rounded-3xl hover:border-foreground/50 hover:bg-muted/30 hover:shadow-lg transition-all group"
                 >
                   <div className="flex-shrink-0">
-                    <Mail className="w-6 h-6 text-foreground/70 group-hover:text-foreground transition-colors" />
+                    <Mail className="w-6 h-6 text-foreground/80 group-hover:text-foreground transition-colors" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs text-muted-foreground/60 font-medium uppercase tracking-wider mb-0.5">Email</p>
+                    <p className="text-xs text-foreground/70 font-medium uppercase tracking-wider mb-0.5">Email</p>
                     <span className="text-foreground font-light text-sm truncate">cheadara133@gmail.com</span>
                   </div>
                 </a>
@@ -460,46 +511,49 @@ export default function Home() {
                   href="https://www.linkedin.com/in/chea-ilong-88bb83333/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-6 border border-border/30 rounded-3xl hover:border-foreground/30 hover:bg-muted/20 hover:shadow-lg hover:shadow-foreground/5 transition-all group"
+                  className="flex items-center gap-4 p-6 border border-border/50 rounded-3xl hover:border-foreground/50 hover:bg-muted/30 hover:shadow-lg transition-all group"
                   aria-label="LinkedIn"
                 >
-                  <Linkedin className="w-6 h-6 flex-shrink-0 text-foreground/70 group-hover:text-foreground transition-colors" />
-                  <span className="text-sm font-light text-foreground/85">LinkedIn</span>
+                  <Linkedin className="w-6 h-6 flex-shrink-0 text-foreground/80 group-hover:text-foreground transition-colors" />
+                  <span className="text-sm font-light text-foreground">LinkedIn</span>
                 </a>
                 <a
                   href="https://github.com/Chea-Ilong"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-6 border border-border/30 rounded-3xl hover:border-foreground/30 hover:bg-muted/20 hover:shadow-lg hover:shadow-foreground/5 transition-all group"
+                  className="flex items-center gap-4 p-6 border border-border/50 rounded-3xl hover:border-foreground/50 hover:bg-muted/30 hover:shadow-lg transition-all group"
                   aria-label="GitHub"
                 >
-                  <Github className="w-6 h-6 flex-shrink-0 text-foreground/70 group-hover:text-foreground transition-colors" />
-                  <span className="text-sm font-light text-foreground/85">GitHub</span>
+                  <Github className="w-6 h-6 flex-shrink-0 text-foreground/80 group-hover:text-foreground transition-colors" />
+                  <span className="text-sm font-light text-foreground">GitHub</span>
                 </a>
                 <a
                   href="https://t.me/Chea_Ilong"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-6 border border-border/30 rounded-3xl hover:border-foreground/30 hover:bg-muted/20 hover:shadow-lg hover:shadow-foreground/5 transition-all group"
+                  className="flex items-center gap-4 p-6 border border-border/50 rounded-3xl hover:border-foreground/50 hover:bg-muted/30 hover:shadow-lg transition-all group"
                   aria-label="Telegram"
                 >
-                  <Send className="w-6 h-6 flex-shrink-0 text-foreground/70 group-hover:text-foreground transition-colors" />
-                  <span className="text-sm font-light text-foreground/85">Telegram</span>
+                  <Send className="w-6 h-6 flex-shrink-0 text-foreground/80 group-hover:text-foreground transition-colors" />
+                  <span className="text-sm font-light text-foreground">Telegram</span>
                 </a>
               </div>
             </div>
+          </div>
           </div>
         </section>
 
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border/30 py-16 px-6 sm:px-8 max-w-6xl mx-auto">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="text-sm text-muted-foreground/60 font-light">© 2025 Chea Ilong. All rights reserved.</p>
-          <div className="flex gap-8 text-sm text-muted-foreground/60 font-light">
-            <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
-            <a href="#" className="hover:text-foreground transition-colors">Terms</a>
+      <footer className="bg-muted/30 -mx-6 px-6 py-16 sm:-mx-8 sm:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <p className="text-sm text-foreground/70 font-light">© 2025 Chea Ilong. All rights reserved.</p>
+            <div className="flex gap-8 text-sm text-foreground/70 font-light">
+              <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
+              <a href="#" className="hover:text-foreground transition-colors">Terms</a>
+            </div>
           </div>
         </div>
       </footer>
