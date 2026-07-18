@@ -4,31 +4,31 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.998 0 0);
-  --foreground: oklch(0.12 0 0);
-  --card: oklch(0.998 0 0);
-  --card-foreground: oklch(0.12 0 0);
-  --popover: oklch(0.998 0 0);
-  --popover-foreground: oklch(0.12 0 0);
-  --primary: oklch(0.12 0 0);
-  --primary-foreground: oklch(0.998 0 0);
+  --background: oklch(0.988 0.002 250);
+  --foreground: oklch(0.16 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0 0);
+  --primary: oklch(0.16 0 0);
+  --primary-foreground: oklch(0.99 0 0);
   --secondary: oklch(0.40 0 0);
   --secondary-foreground: oklch(0.998 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.42 0 0);
+  --muted: oklch(0.955 0.003 250);
+  --muted-foreground: oklch(0.46 0 0);
   --accent: oklch(0.18 0 0);
   --accent-foreground: oklch(0.998 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0 0);
-  --input: oklch(0.92 0 0);
+  --border: oklch(0.9 0.003 250);
+  --input: oklch(0.9 0.003 250);
   --ring: oklch(0.52 0.06 60);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.75rem;
+  --radius: 0.5rem;
   --sidebar: oklch(0.97 0.007 80);
   --sidebar-foreground: oklch(0.15 0 0);
   --sidebar-primary: oklch(0.15 0 0);
@@ -118,26 +118,29 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    letter-spacing: 0 !important;
   }
   
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   body {
     @apply bg-background text-foreground;
+    text-rendering: optimizeLegibility;
   }
   
   h1 {
-    @apply text-5xl sm:text-6xl lg:text-6xl font-light leading-tight tracking-tight text-foreground;
+    @apply text-5xl sm:text-6xl lg:text-6xl font-light leading-tight text-foreground;
   }
   
   h2 {
-    @apply text-3xl sm:text-4xl font-light leading-tight tracking-tight text-foreground;
+    @apply text-3xl sm:text-4xl font-light leading-tight text-foreground;
   }
   
   h3 {
-    @apply text-lg sm:text-xl font-light tracking-tight text-foreground;
+    @apply text-lg sm:text-xl font-light text-foreground;
   }
   
   p {
@@ -145,33 +148,36 @@
   }
 
   a {
-    @apply transition-all duration-300;
+    text-underline-offset: 0.2em;
   }
 
   section {
     @apply scroll-mt-20;
   }
-  
-  h2 {
-    @apply text-4xl sm:text-5xl font-light tracking-tight leading-tight;
-  }
-  
-  h3 {
-    @apply text-2xl sm:text-3xl font-light tracking-wide;
-  }
-  
-  p {
-    @apply leading-relaxed tracking-wide;
+
+  ::selection {
+    @apply bg-foreground text-background;
   }
 
-  a {
-    @apply transition-all duration-300;
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
 @layer components {
   .skill-tag {
-    @apply px-3 py-1.5 border border-border text-xs font-light hover:border-accent hover:text-accent transition-all duration-300;
+    @apply px-3 py-1.5 border border-border text-xs font-light hover:border-accent hover:text-accent transition-colors duration-300;
   }
 
   .section-header {
@@ -183,7 +189,7 @@
   }
 
   .cta-button {
-    @apply inline-flex items-center gap-3 px-6 py-3 border border-foreground hover:bg-foreground hover:text-background transition-all duration-300 font-light;
+    @apply inline-flex items-center gap-3 px-6 py-3 border border-foreground hover:bg-foreground hover:text-background transition-colors duration-300 font-light;
   }
 
   .refined-link {
