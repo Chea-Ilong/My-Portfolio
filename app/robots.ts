@@ -8,6 +8,7 @@ export default function robots(): MetadataRoute.Robots {
                 allow: '/',
             },
         ],
+        host: 'https://cheailong.dev',
         sitemap: 'https://cheailong.dev/sitemap.xml',
     }
 }

@@ -1,18 +1,17 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 /* ───────────────────────────────── SEO ───────────────────────────────── */
 
 const siteUrl = 'https://cheailong.dev';
-const siteName = 'Chea Ilong — Full-Stack Developer';
+const siteName = 'Chea Ilong | Full-Stack Developer in Cambodia';
 const siteDescription =
-  'Portfolio of Chea Ilong, a Full-Stack Developer specializing in React, Next.js, TypeScript, and modern web technologies. Explore projects like AUREA and PhsarDesign, and learn about my experience in startup innovation and product development.';
+  'Chea Ilong is a full-stack developer in Cambodia building secure, production-ready web products with Next.js, React, TypeScript, PostgreSQL, and Supabase.';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -46,9 +45,11 @@ export const metadata: Metadata = {
     'TypeScript',
     'JavaScript',
     'Portfolio',
+    'LeakScope',
     'AUREA',
     'PhsarDesign',
     'Cambodia Developer',
+    'Supabase Developer',
     'CADT',
     'Frontend Developer',
     'Backend Developer',
@@ -84,6 +85,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
+    alternateLocale: ['km_KH'],
     url: siteUrl,
     siteName: 'Chea Ilong',
     title: siteName,
@@ -91,9 +93,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/mypic.png',
-        width: 1200,
-        height: 630,
-        alt: 'Chea Ilong — Full-Stack Developer',
+        width: 640,
+        height: 640,
+        alt: 'Chea Ilong, Full-Stack Developer in Cambodia',
         type: 'image/png',
       },
     ],
@@ -101,11 +103,10 @@ export const metadata: Metadata = {
 
   /* ── Twitter Card ───────────────────────────────────────────────── */
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: siteName,
     description: siteDescription,
     images: ['/mypic.png'],
-    creator: '@cheailong',
   },
 
   /* ── Icons ──────────────────────────────────────────────────────── */
@@ -137,12 +138,17 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Person',
+    '@id': `${siteUrl}/#person`,
     name: 'Chea Ilong',
     alternateName: ['Ilong Chea', 'cheailong', 'Chea ilong', 'chea ilong', 'Chea-Ilong'],
     url: siteUrl,
     image: `${siteUrl}/mypic.png`,
     jobTitle: 'Full-Stack Developer',
     description: siteDescription,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': siteUrl,
+    },
     nationality: {
       '@type': 'Country',
       name: 'Cambodia',
@@ -159,18 +165,33 @@ const jsonLd = [
     ],
     knowsAbout: [
       'React', 'Next.js', 'TypeScript', 'JavaScript', 'Node.js',
-      'PostgreSQL', 'MongoDB', 'Docker', 'Full-Stack Development',
+      'PostgreSQL', 'Supabase', 'MongoDB', 'Docker', 'Full-Stack Development',
+      'Web Application Security',
+    ],
+    knowsLanguage: [
+      {
+        '@type': 'Language',
+        name: 'English',
+        alternateName: 'en',
+      },
+      {
+        '@type': 'Language',
+        name: 'Khmer',
+        alternateName: 'km',
+      },
     ],
   },
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Chea Ilong — Full-Stack Developer Portfolio',
+    '@id': `${siteUrl}/#website`,
+    name: 'Chea Ilong | Full-Stack Developer Portfolio',
     url: siteUrl,
     description: siteDescription,
+    inLanguage: ['en', 'km'],
     author: {
       '@type': 'Person',
-      name: 'Chea Ilong',
+      '@id': `${siteUrl}/#person`,
     },
   },
 ];
@@ -190,7 +211,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${_geist.className} antialiased`} suppressHydrationWarning>
         {children}
         <Analytics />
       </body>
