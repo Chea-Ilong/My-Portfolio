@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "check": "npm run build && node scripts/check.mjs",
+    "check": "astro check && npm run build && node scripts/check.mjs",
     "preview": "astro preview"
   },
   "dependencies": {
@@ -15,6 +15,7 @@
     "astro": "^7.1.1"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@tailwindcss/vite": "^4.3.3",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"

@@ -1,7 +1,18 @@
 ---
+import { Image } from 'astro:assets';
 import { ArrowRight, CodeXml as Code2, ExternalLink, Mail, Send } from '@lucide/astro';
 import BrandIcon from '../components/BrandIcon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import profileImage from '../assets/images/profile/chea-ilong.png';
+import actsmartImage from '../assets/images/experience/actsmart.jpeg';
+import turingHackathonImage from '../assets/images/experience/turing-hackathon.jpeg';
+import cadtNextGenImage from '../assets/images/experience/cadt-next-gen.jpg';
+import cadtCodingChampionshipImage from '../assets/images/experience/cadt-coding-championship.jpg';
+import youthEducationSupportsImage from '../assets/images/experience/youth-education-supports.jpg';
+import leakscopeImage from '../assets/images/projects/leakscope.png';
+import aureaImage from '../assets/images/projects/aurea.png';
+import phsarDesignImage from '../assets/images/projects/phsar-design.png';
+import roomRentalImage from '../assets/images/projects/room-rental.jpeg';
 
 interface NavItem {
   label: Record<Language, string>;
@@ -29,7 +40,7 @@ const experiences = [
     descriptionKm: 'ត្រូវបានជ្រើសរើសចូលរួម ACTSmart ដែលជាកម្មវិធីបណ្តុះអាជីវកម្មផ្តោតលើបច្ចេកវិទ្យា សម្រាប់គាំទ្រស្តាតអាប់ សហគ្រាសធុនតូច និងមធ្យម និងសហគ្រិនសាកលវិទ្យាល័យនៅកម្ពុជា។ បានចូលរួមពេញមួយកម្មវិធីរយៈពេល 5 ខែ ដោយទទួលបានបទពិសោធន៍ជាក់ស្តែងក្នុងការអភិវឌ្ឍបច្ចេកទេស ប្រតិបត្តិការស្តាតអាប់ និងការផ្ទៀងផ្ទាត់ផលិតផល ព្រមទាំងបានបង្កើត MVP ដែលអាចប្រើប្រាស់ជាក់ស្តែង និងត្រូវបានសាកល្បងដោយអ្នកប្រើប្រាស់ចុះឈ្មោះជាង 130 នាក់។',
     highlights: ['Full-Stack Development', 'Startup Innovation', 'Product Validation', 'MVP Development'],
     highlightsKm: ['ការអភិវឌ្ឍ Full-Stack', 'នវានុវត្តន៍ស្តាតអាប់', 'ការផ្ទៀងផ្ទាត់ផលិតផល', 'ការអភិវឌ្ឍ MVP'],
-    image: '/images/experience/actsmart.jpeg',
+    image: actsmartImage,
   },
   {
     role: 'Co-founder',
@@ -41,7 +52,7 @@ const experiences = [
     descriptionKm: 'បានចូលរួមសហស្ថាបនា Phsar Design ដែលជាវេទិកាសម្រាប់សិល្បករឌីជីថលឯករាជ្យបង្ហាញស្នាដៃ ស្វែងរកឱកាសការងារ និងសម្រាប់អតិថិជនស្វែងរក និងជួលអ្នកមានទេពកោសល្យច្នៃប្រឌិត។ បានចូលរួមក្នុងដំណាក់កាលបង្កើតគំនិត ដោយរៀបចំ mockup និង prototype ដើម្បីគាំទ្រការអភិវឌ្ឍគំនិតរបស់ក្រុម ដែលទទួលបានពានកិត្តិយសសម្រាប់ការងារជាក្រុម និងការអនុវត្តគម្រោង។',
     highlights: ['Concept Development', 'UI/UX Design', 'Teamwork'],
     highlightsKm: ['ការអភិវឌ្ឍគំនិត', 'ការរចនា UI/UX', 'ការងារជាក្រុម'],
-    image: '/images/experience/turing-hackathon.jpeg',
+    image: turingHackathonImage,
   },
   {
     role: 'Organizer',
@@ -53,7 +64,7 @@ const experiences = [
     descriptionKm: 'បានបម្រើការជាអ្នករៀបចំកម្មវិធី CADT Next-Gen ដោយសម្របសម្រួលជាមួយសមាជិកក្រុម ដើម្បីកំណត់គោលដៅរួម បែងចែកភារកិច្ច និងតាមដានវឌ្ឍនភាព។ បានអនុវត្តជំនាញភាពជាអ្នកដឹកនាំ ការគិតវិភាគ និងការសម្រេចចិត្ត ដើម្បីគាំទ្រការអនុវត្តកម្មវិធីឱ្យរលូន និងជោគជ័យ។',
     highlights: ['Program Coordination', 'Leadership', 'Team Management'],
     highlightsKm: ['ការសម្របសម្រួលកម្មវិធី', 'ភាពជាអ្នកដឹកនាំ', 'ការគ្រប់គ្រងក្រុម'],
-    image: '/images/experience/cadt-next-gen.jpg',
+    image: cadtNextGenImage,
   },
   {
     role: 'Project Lead',
@@ -65,7 +76,7 @@ const experiences = [
     descriptionKm: 'ត្រូវបាន CADT Coding Club ជ្រើសរើសជាប្រធានគម្រោង ដើម្បីរចនា និងបង្កើតប្រព័ន្ធតារាងពិន្ទុផ្ទាល់ខ្លួនសម្រាប់ការប្រកួត CFCC។ បានដឹកនាំការអភិវឌ្ឍ និងដាក់ឱ្យប្រើប្រាស់វេទិកាដែលភ្ជាប់ជាមួយ HackerRank ដើម្បីបង្កើនតម្លាភាពពិន្ទុ និងសម្រួលប្រតិបត្តិការកម្មវិធី តាមរយៈការសហការជិតស្និទ្ធជាមួយអ្នករៀបចំ។',
     highlights: ['Project Leadership', 'Full-Stack Development', 'System Architecture'],
     highlightsKm: ['ការដឹកនាំគម្រោង', 'ការអភិវឌ្ឍ Full-Stack', 'ស្ថាបត្យកម្មប្រព័ន្ធ'],
-    image: '/images/experience/cadt-coding-championship.jpg',
+    image: cadtCodingChampionshipImage,
   },
   {
     role: 'Trainer',
@@ -77,7 +88,7 @@ const experiences = [
     descriptionKm: 'បានបណ្តុះបណ្តាលវគ្គ Scratch ដល់និស្សិតនៅ PTEC ដើម្បីរួមចំណែកដល់ការរីកចម្រើនផ្នែកសិក្សារបស់ពួកគេ។ បានសហការជាមួយអ្នកស្ម័គ្រចិត្ត និងបុគ្គលិក ដើម្បីរៀបចំវគ្គសិក្សាដែលគាំទ្រទាំងការអភិវឌ្ឍជំនាញសិក្សា និងជំនាញទន់។',
     highlights: ['Technical Training', 'Education', 'Mentoring'],
     highlightsKm: ['ការបណ្តុះបណ្តាលបច្ចេកទេស', 'ការអប់រំ', 'ការណែនាំ'],
-    image: '/images/experience/youth-education-supports.jpg',
+    image: youthEducationSupportsImage,
   },
 ];
 
@@ -92,7 +103,7 @@ const projects = [
     github: 'https://github.com/PromSereyreaksa/LeakScope',
     highlights: 'One URL. Full audit path.',
     highlightsKm: 'URL តែមួយ។ ផ្លូវត្រួតពិនិត្យពេញលេញ។',
-    image: '/images/projects/leakscope.png',
+    image: leakscopeImage,
   },
   {
     title: 'AUREA',
@@ -104,7 +115,7 @@ const projects = [
     github: 'https://github.com/imposter-dot-com/AUREA---Backend',
     highlights: 'Portfolio Builder for Creatives',
     highlightsKm: 'ឧបករណ៍បង្កើត Portfolio សម្រាប់អ្នកច្នៃប្រឌិត',
-    image: '/images/projects/aurea.png',
+    image: aureaImage,
   },
   {
     title: 'PhsarDesign',
@@ -116,7 +127,7 @@ const projects = [
     github: 'https://github.com/PromSereyreaksa/PhsarDesign',
     highlights: 'Creative Freelancing Platform',
     highlightsKm: 'វេទិកាការងារឯករាជ្យសម្រាប់អ្នកច្នៃប្រឌិត',
-    image: '/images/projects/phsar-design.png',
+    image: phsarDesignImage,
   },
   {
     title: 'Room Rental Management System',
@@ -128,7 +139,7 @@ const projects = [
     github: 'https://github.com/Chea-Ilong/FullStack-Room-Rental-Management-System',
     highlights: 'Full-Stack Java Desktop Application',
     highlightsKm: 'កម្មវិធី Desktop Java Full-Stack',
-    image: '/images/projects/room-rental.jpeg',
+    image: roomRentalImage,
   },
 ];
 
@@ -137,24 +148,24 @@ const skills = [
     category: 'Programming Languages',
     categoryKm: 'ភាសាសរសេរកម្មវិធី',
     items: [
-      { name: 'JavaScript', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
-      { name: 'TypeScript', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg', url: 'https://www.typescriptlang.org/' },
-      { name: 'C++', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg', url: 'https://www.w3schools.com/cpp/' },
-      { name: 'Java', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg', url: 'https://www.java.com/' },
-      { name: 'HTML5', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg', url: 'https://www.w3schools.com/html/' },
-      { name: 'CSS3', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg', url: 'https://www.w3schools.com/css/' },
-      { name: 'Dart', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/dart/dart-original.svg', url: 'https://dart.dev/' },
+      { name: 'JavaScript', icon: '/icons/skills/javascript-original.svg', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
+      { name: 'TypeScript', icon: '/icons/skills/typescript-original.svg', url: 'https://www.typescriptlang.org/' },
+      { name: 'C++', icon: '/icons/skills/cplusplus-original.svg', url: 'https://www.w3schools.com/cpp/' },
+      { name: 'Java', icon: '/icons/skills/java-original.svg', url: 'https://www.java.com/' },
+      { name: 'HTML5', icon: '/icons/skills/html5-original-wordmark.svg', url: 'https://www.w3schools.com/html/' },
+      { name: 'CSS3', icon: '/icons/skills/css3-original-wordmark.svg', url: 'https://www.w3schools.com/css/' },
+      { name: 'Dart', icon: '/icons/skills/dart-original.svg', url: 'https://dart.dev/' },
     ],
   },
   {
     category: 'Framework',
     categoryKm: 'Framework',
     items: [
-      { name: 'React', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg', url: 'https://reactjs.org/' },
-      { name: 'Next.js', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg', url: 'https://nextjs.org/' },
-      { name: 'TailwindCSS', icon: 'https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg', url: 'https://tailwindcss.com/' },
-      { name: 'Flutter', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg', url: 'https://flutter.dev/' },
-      { name: 'Express', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg', url: 'https://expressjs.com/' },
+      { name: 'React', icon: '/icons/skills/react-original-wordmark.svg', url: 'https://reactjs.org/' },
+      { name: 'Next.js', icon: '/icons/skills/nextjs-original.svg', url: 'https://nextjs.org/' },
+      { name: 'TailwindCSS', icon: '/icons/skills/tailwindcss-icon.svg', url: 'https://tailwindcss.com/' },
+      { name: 'Flutter', icon: '/icons/skills/flutter-original.svg', url: 'https://flutter.dev/' },
+      { name: 'Express', icon: '/icons/skills/express-original-wordmark.svg', url: 'https://expressjs.com/' },
 
     ],
   },
@@ -162,25 +173,25 @@ const skills = [
     category: 'Backend & Databases',
     categoryKm: 'Backend និងមូលដ្ឋានទិន្នន័យ',
     items: [
-      { name: 'Node.js', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg', url: 'https://nodejs.org' },
-      { name: 'PostgreSQL', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg', url: 'https://www.postgresql.org' },
-      { name: 'MongoDB', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg', url: 'https://www.mongodb.com/' },
-      { name: 'MySQL', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg', url: 'https://www.mysql.com/' },
-      { name: 'MariaDB', icon: 'https://www.vectorlogo.zone/logos/mariadb/mariadb-icon.svg', url: 'https://mariadb.org/' },
-      { name: 'Firebase', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/firebase/firebase-plain.svg', url: 'https://firebase.google.com/' },
-      { name: 'Supabase', icon: 'https://www.vectorlogo.zone/logos/supabase/supabase-icon.svg', url: 'https://supabase.com/' },
+      { name: 'Node.js', icon: '/icons/skills/nodejs-original-wordmark.svg', url: 'https://nodejs.org' },
+      { name: 'PostgreSQL', icon: '/icons/skills/postgresql-original-wordmark.svg', url: 'https://www.postgresql.org' },
+      { name: 'MongoDB', icon: '/icons/skills/mongodb-original-wordmark.svg', url: 'https://www.mongodb.com/' },
+      { name: 'MySQL', icon: '/icons/skills/mysql-original-wordmark.svg', url: 'https://www.mysql.com/' },
+      { name: 'MariaDB', icon: '/icons/skills/mariadb-icon.svg', url: 'https://mariadb.org/' },
+      { name: 'Firebase', icon: '/icons/skills/firebase-plain.svg', url: 'https://firebase.google.com/' },
+      { name: 'Supabase', icon: '/icons/skills/supabase-icon.svg', url: 'https://supabase.com/' },
     ],
   },
   {
     category: 'DevOps & Tools',
     categoryKm: 'DevOps និងឧបករណ៍',
     items: [
-      { name: 'Docker', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg', url: 'https://www.docker.com/' },
-      { name: 'Git', icon: 'https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg', url: 'https://git-scm.com/' },
-      { name: 'Linux', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg', url: 'https://www.linux.org/' },
-      { name: 'Postman', icon: 'https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg', url: 'https://postman.com/' },
-      { name: 'Figma', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/figma/figma-original.svg', url: 'https://www.figma.com/' },
-      { name: 'DigitalOcean', icon: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/digitalocean/digitalocean-original.svg', url: 'https://www.digitalocean.com/' },
+      { name: 'Docker', icon: '/icons/skills/docker-original-wordmark.svg', url: 'https://www.docker.com/' },
+      { name: 'Git', icon: '/icons/skills/git-scm-icon.svg', url: 'https://git-scm.com/' },
+      { name: 'Linux', icon: '/icons/skills/linux-original.svg', url: 'https://www.linux.org/' },
+      { name: 'Postman', icon: '/icons/skills/getpostman-icon.svg', url: 'https://postman.com/' },
+      { name: 'Figma', icon: '/icons/skills/figma-original.svg', url: 'https://www.figma.com/' },
+      { name: 'DigitalOcean', icon: '/icons/skills/digitalocean-original.svg', url: 'https://www.digitalocean.com/' },
     ],
   },
 ];
@@ -246,7 +257,7 @@ const copy = {
       <!-- Navigation -->
       <header class="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md">
         <nav class="mx-auto flex h-20 max-w-6xl items-center justify-between px-5 sm:px-8">
-          <a href="#" class="text-base font-semibold transition-opacity duration-300 hover:opacity-60">
+          <a href="#" class="text-base font-semibold transition-opacity duration-300 ease-soft hover:opacity-60">
             Chea Ilong
           </a>
           <div class="flex items-center gap-4 lg:gap-7">
@@ -257,10 +268,8 @@ const copy = {
                   data-nav-link={item.href.slice(1)}
                   data-en={item.label.en}
                   data-km={item.label.km}
-                  class={`py-2 text-base transition-colors duration-300 ${
-                    index === 0
-                      ? 'text-foreground'
-                      : 'text-muted-foreground hover:text-foreground'
+                  class={`nav-link py-2 text-base transition-colors duration-300 ease-soft hover:text-foreground ${
+                    index === 0 ? 'text-foreground is-active' : 'text-muted-foreground'
                   }`}
                 >
                   {item.label.en}
@@ -280,17 +289,17 @@ const copy = {
               <span
                 id="language-indicator"
                 aria-hidden="true"
-                class="absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] translate-x-0 rounded-md bg-foreground transition-transform duration-300 ease-out"
+                class="absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] translate-x-0 rounded-md bg-foreground transition-transform duration-300 ease-soft"
               />
               <span
                 id="language-en"
-                class="relative z-10 flex items-center justify-center rounded-md text-sm font-medium leading-none text-background transition-colors duration-300"
+                class="relative z-10 flex items-center justify-center rounded-md text-sm font-medium leading-none text-background transition-colors duration-300 ease-soft"
               >
                 English
               </span>
               <span
                 id="language-km"
-                class="relative z-10 flex items-center justify-center rounded-md text-sm font-medium leading-none text-muted-foreground transition-colors duration-300"
+                class="relative z-10 flex items-center justify-center rounded-md text-sm font-medium leading-none text-muted-foreground transition-colors duration-300 ease-soft"
               >
                 ខ្មែរ
               </span>
@@ -304,7 +313,7 @@ const copy = {
         <div class="mx-auto max-w-6xl">
           <div class="grid items-center gap-14 md:grid-cols-[1.1fr_0.9fr] md:gap-16 lg:gap-24">
             <div class="space-y-10">
-              <div class="space-y-6">
+              <div class="space-y-6" data-reveal-item>
                 <p
                   class="text-xs font-medium uppercase text-muted-foreground"
                   data-en={copy.en.role}
@@ -319,23 +328,25 @@ const copy = {
                 </h1>
               </div>
               <p
-                class="max-w-lg text-base font-normal leading-relaxed text-foreground/65 sm:text-lg"
+                data-reveal-item
+                style="--reveal-delay: 90ms"
+                class="max-w-lg text-base font-normal leading-relaxed text-body sm:text-lg"
                 data-en={copy.en.heroDescription}
                 data-km={copy.km.heroDescription}
               >
                 {copy.en.heroDescription}
               </p>
-              <div class="flex flex-wrap gap-3 pt-2">
+              <div class="flex flex-wrap gap-3 pt-2" data-reveal-item style="--reveal-delay: 180ms">
                 <a
                   href="#projects"
-                  class="group inline-flex items-center gap-3 rounded-lg bg-foreground px-6 py-3.5 text-sm font-medium text-background transition-[background-color,transform] duration-300 ease-out hover:-translate-y-px hover:bg-foreground/85"
+                  class="group inline-flex items-center gap-3 rounded-lg bg-foreground px-6 py-3.5 text-sm font-medium text-background transition-[background-color,transform] duration-300 ease-soft hover:-translate-y-px hover:bg-foreground/85"
                 >
                   <span data-en={copy.en.viewProjects} data-km={copy.km.viewProjects}>{copy.en.viewProjects}</span>
-                  <ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                  <ArrowRight class="h-4 w-4 transition-transform duration-300 ease-soft group-hover:translate-x-0.5" />
                 </a>
                 <a
                   href="#contact"
-                  class="inline-flex items-center rounded-lg border border-border bg-card px-6 py-3.5 text-sm font-normal text-foreground transition-[background-color,border-color,transform] duration-300 ease-out hover:-translate-y-px hover:border-foreground/25 hover:bg-muted/40"
+                  class="inline-flex items-center rounded-lg border border-border bg-card px-6 py-3.5 text-sm font-normal text-foreground transition-[background-color,border-color,transform] duration-300 ease-soft hover:-translate-y-px hover:border-foreground/25 hover:bg-muted/40"
                   data-en={copy.en.contactMe}
                   data-km={copy.km.contactMe}
                 >
@@ -343,16 +354,18 @@ const copy = {
                 </a>
               </div>
             </div>
-            <div class="flex justify-center md:justify-end">
+            <div class="flex justify-center md:justify-end" data-reveal-item style="--reveal-delay: 120ms">
               <div class="aspect-[5/6] w-full max-w-80 overflow-hidden rounded-lg border border-border/70 bg-card shadow-[0_20px_50px_rgba(0,0,0,0.06)]">
-                <img
-                  src="/images/profile/chea-ilong.png"
+                <Image
+                  src={profileImage}
                   alt="Chea Ilong"
                   width={320}
                   height={384}
+                  widths={[320, 640]}
+                  sizes="320px"
                   class="h-full w-full object-cover"
                   loading="eager"
-                  sizes="320px"
+                  fetchpriority="high"
                 />
               </div>
             </div>
@@ -364,15 +377,15 @@ const copy = {
       <section id="about" class="border-t border-border/70 bg-muted/20 px-5 py-24 sm:px-8 sm:py-32">
         <div class="mx-auto max-w-6xl">
           <div>
-            <div class="space-y-6">
+            <div class="space-y-6" data-reveal-item>
               <p class="text-xs font-medium uppercase text-muted-foreground" data-en={copy.en.about} data-km={copy.km.about}>{copy.en.about}</p>
               <h2 class="max-w-2xl text-4xl font-normal leading-tight sm:text-5xl" data-en={copy.en.aboutHeading} data-km={copy.km.aboutHeading}>{copy.en.aboutHeading}</h2>
             </div>
             <div class="grid gap-12 pt-12 md:grid-cols-2">
-              <p class="max-w-xl text-foreground/65" data-en={copy.en.aboutDescription} data-km={copy.km.aboutDescription}>
+              <p class="max-w-xl text-body" data-reveal-item data-en={copy.en.aboutDescription} data-km={copy.km.aboutDescription}>
                 {copy.en.aboutDescription}
               </p>
-              <div class="space-y-6 rounded-lg border border-border/70 bg-card p-7 shadow-[0_8px_24px_rgba(0,0,0,0.035)] sm:p-8">
+              <div data-reveal-item style="--reveal-delay: 90ms" class="space-y-6 rounded-lg border border-border/70 bg-card p-7 shadow-[0_8px_24px_rgba(0,0,0,0.035)] sm:p-8">
                 <p class="text-xs font-medium uppercase text-muted-foreground" data-en={copy.en.currentlyWorking} data-km={copy.km.currentlyWorking}>{copy.en.currentlyWorking}</p>
                 <p class="font-semibold text-foreground" data-en={copy.en.currentWork} data-km={copy.km.currentWork}>{copy.en.currentWork}</p>
                 <p class="pt-4 text-xs font-medium uppercase text-muted-foreground" data-en={copy.en.learning} data-km={copy.km.learning}>{copy.en.learning}</p>
@@ -388,18 +401,18 @@ const copy = {
         <div class="mx-auto max-w-6xl">
           <div class="space-y-14">
             <div class="text-center">
-              <h2 class="text-4xl font-normal text-foreground sm:text-5xl" data-en={copy.en.experience} data-km={copy.km.experience}>{copy.en.experience}</h2>
+              <h2 data-reveal-item class="text-4xl font-normal text-foreground sm:text-5xl" data-en={copy.en.experience} data-km={copy.km.experience}>{copy.en.experience}</h2>
             </div>
             <div class="relative mx-auto max-w-6xl">
               <!-- Timeline Line -->
               <div class="absolute bottom-0 left-2 top-0 w-px bg-border" />
 
               <div class="space-y-14">
-                {experiences.map((exp) => (
-                  <div class="group relative pl-10 sm:pl-12">
+                {experiences.map((exp, index) => (
+                  <div class="group relative pl-10 sm:pl-12" data-reveal-item style={`--reveal-delay: ${index * 70}ms`}>
                     <!-- Timeline Node -->
                     <div class="absolute left-0.5 top-1.5 flex items-center justify-center">
-                      <div class="h-4 w-4 rounded-full bg-foreground ring-[5px] ring-background transition-transform duration-300 ease-out group-hover:scale-110" />
+                      <div class="h-4 w-4 rounded-full bg-foreground ring-[5px] ring-background transition-transform duration-300 ease-soft group-hover:scale-110" />
                     </div>
 
                     <!-- Connecting Line Animation -->
@@ -410,16 +423,16 @@ const copy = {
                       <div class="space-y-3 md:col-span-2">
                         <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
                           <h3 class="text-xl font-semibold text-foreground sm:text-2xl">{exp.company}</h3>
-                          <span class="whitespace-nowrap text-xs font-medium uppercase text-foreground/45" data-en={exp.period} data-km={exp.periodKm}>{exp.period}</span>
+                          <span class="whitespace-nowrap text-xs font-medium uppercase tabular-nums text-muted-foreground" data-en={exp.period} data-km={exp.periodKm}>{exp.period}</span>
                         </div>
-                        <p class="text-base font-semibold text-foreground/85" data-en={exp.role} data-km={exp.roleKm}>{exp.role}</p>
-                        <p class="text-base font-normal leading-relaxed text-foreground/60" data-en={exp.description} data-km={exp.descriptionKm}>
+                        <p class="text-base font-semibold text-strong" data-en={exp.role} data-km={exp.roleKm}>{exp.role}</p>
+                        <p class="text-base font-normal leading-relaxed text-body" data-en={exp.description} data-km={exp.descriptionKm}>
                           {exp.description}
                         </p>
                         <div class="flex flex-wrap gap-2 pt-2">
                           {exp.highlights.map((highlight, index) => (
                             <span
-                              class="rounded-md border border-border/60 bg-muted/50 px-2.5 py-1 text-xs font-medium text-foreground/60"
+                              class="rounded-md border border-border/60 bg-muted/50 px-2.5 py-1 text-xs font-medium text-muted-foreground"
                               data-en={highlight}
                               data-km={exp.highlightsKm[index]}
                             >
@@ -432,11 +445,12 @@ const copy = {
                       <!-- Experience Image -->
                       {exp.image && (
                         <div class="relative h-48 w-full overflow-hidden rounded-lg border border-border/60 bg-muted/20 shadow-[0_8px_24px_rgba(0,0,0,0.035)]">
-                          <img
+                          <Image
                             src={exp.image}
                             alt={exp.company}
-                            class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.015]"
+                            widths={[400, 800]}
                             sizes="(max-width: 768px) 100vw, 33vw"
+                            class="h-full w-full object-cover transition-transform duration-500 ease-soft group-hover:scale-[1.015]"
                             loading="lazy"
                           />
                         </div>
@@ -455,11 +469,11 @@ const copy = {
         <div class="mx-auto max-w-6xl">
           <div class="space-y-14">
             <div class="text-center">
-              <h2 class="text-4xl font-normal text-foreground sm:text-5xl" data-en={copy.en.skills} data-km={copy.km.skills}>{copy.en.skills}</h2>
+              <h2 data-reveal-item class="text-4xl font-normal text-foreground sm:text-5xl" data-en={copy.en.skills} data-km={copy.km.skills}>{copy.en.skills}</h2>
             </div>
             <div class="mx-auto grid max-w-5xl gap-14 md:grid-cols-2 md:gap-12 lg:gap-16">
-              {skills.map((skillGroup) => (
-                <div class="space-y-6">
+              {skills.map((skillGroup, index) => (
+                <div class="space-y-6" data-reveal-item style={`--reveal-delay: ${index * 70}ms`}>
                   <h3 class="text-lg font-semibold text-foreground" data-en={skillGroup.category} data-km={skillGroup.categoryKm}>{skillGroup.category}</h3>
                   <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     {skillGroup.items.map((skill) => (
@@ -467,7 +481,7 @@ const copy = {
                         href={skill.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="group/skill flex items-center gap-4 rounded-lg border border-border/60 bg-card/60 p-4 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-sm"
+                        class="group/skill flex items-center gap-4 rounded-lg border border-border/60 bg-card/60 p-4 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-soft hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-sm"
                       >
                         <img
                           src={skill.icon}
@@ -477,7 +491,7 @@ const copy = {
                           class="w-8 h-8 shrink-0 object-contain"
                           loading="lazy"
                         />
-                        <span class="text-sm font-normal text-foreground/65 transition-colors duration-300 group-hover/skill:text-foreground">
+                        <span class="text-sm font-normal text-body transition-colors duration-300 ease-soft group-hover/skill:text-foreground">
                           {skill.name}
                         </span>
                       </a>
@@ -495,16 +509,17 @@ const copy = {
         <div class="mx-auto max-w-6xl">
           <div class="space-y-14">
             <div class="text-center">
-              <h2 class="text-4xl font-normal text-foreground sm:text-5xl" data-en={copy.en.projects} data-km={copy.km.projects}>{copy.en.projects}</h2>
+              <h2 data-reveal-item class="text-4xl font-normal text-foreground sm:text-5xl" data-en={copy.en.projects} data-km={copy.km.projects}>{copy.en.projects}</h2>
             </div>
             <div class="space-y-8">
               {projects.map((project, index) => {
                 const image = project.image ? (
-                  <img
+                  <Image
                     src={project.image}
                     alt={project.title}
-                    class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover/image:scale-[1.015]"
-                    sizes="(max-width: 768px) 100vw, 400px"
+                    widths={[600, 1200]}
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    class="h-full w-full object-cover transition-transform duration-500 ease-soft group-hover/image:scale-[1.015]"
                     loading="lazy"
                   />
                 ) : (
@@ -515,7 +530,9 @@ const copy = {
 
                 return (
                   <article
-                    class="group block rounded-lg border border-border/60 bg-card/50 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-[0_14px_40px_rgba(0,0,0,0.055)] sm:p-8"
+                    data-reveal-item
+                    style={`--reveal-delay: ${(index % 2) * 70}ms`}
+                    class="group block rounded-lg border border-border/60 bg-card/50 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-soft hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-[0_14px_40px_rgba(0,0,0,0.055)] sm:p-8"
                   >
                     <div class="grid items-center gap-8 md:grid-cols-2 lg:gap-12">
                       {project.live ? (
@@ -529,7 +546,7 @@ const copy = {
                           class={`group/image relative h-56 overflow-hidden rounded-md border border-border/60 bg-muted/20 sm:h-72 lg:h-80 ${index % 2 === 1 ? 'md:order-2' : ''}`}
                         >
                           {image}
-                          <span class="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-md border border-white/30 bg-black/65 text-white opacity-0 transition-opacity duration-300 group-hover/image:opacity-100 group-focus-visible/image:opacity-100">
+                          <span class="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-md border border-white/30 bg-black/65 text-white opacity-0 transition-opacity duration-300 ease-soft group-hover/image:opacity-100 group-focus-visible/image:opacity-100">
                             <ExternalLink class="h-4 w-4" />
                           </span>
                         </a>
@@ -540,23 +557,23 @@ const copy = {
                       )}
 
                       <div class={`space-y-6 ${index % 2 === 1 ? 'md:order-1' : ''}`}>
-                        <p class="text-xs font-medium uppercase text-foreground/45">{project.year}</p>
+                        <p class="text-xs font-medium uppercase tabular-nums text-muted-foreground">{project.year}</p>
                         <h3 class="text-3xl font-semibold text-foreground sm:text-4xl">{project.title}</h3>
-                        <p class="text-base leading-relaxed text-foreground/60" data-en={project.description} data-km={project.descriptionKm}>{project.description}</p>
+                        <p class="text-base leading-relaxed text-body" data-en={project.description} data-km={project.descriptionKm}>{project.description}</p>
                         <div class="flex flex-wrap gap-3">
                           {project.tags.map((tag) => (
-                            <span class="rounded-md border border-border/70 bg-transparent px-2.5 py-1 text-xs font-normal text-foreground/50">
+                            <span class="rounded-md border border-border/70 bg-transparent px-2.5 py-1 text-xs font-normal text-muted-foreground">
                               {tag}
                             </span>
                           ))}
                         </div>
                         <div class="flex items-center justify-between gap-4 pt-4">
-                          <p class="text-sm font-semibold text-foreground/85" data-en={project.highlights} data-km={project.highlightsKm}>{project.highlights}</p>
+                          <p class="text-sm font-semibold text-strong" data-en={project.highlights} data-km={project.highlightsKm}>{project.highlights}</p>
                           <a
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="flex shrink-0 items-center gap-1.5 text-sm font-semibold text-foreground transition-opacity duration-300 hover:opacity-60"
+                            class="flex shrink-0 items-center gap-1.5 text-sm font-semibold text-foreground transition-opacity duration-300 ease-soft hover:opacity-60"
                           >
                             <BrandIcon name="github" class="h-4 w-4" />
                             GitHub
@@ -577,26 +594,27 @@ const copy = {
         <div class="mx-auto max-w-6xl">
           <div class="space-y-14">
             <div class="text-center">
-              <h2 class="text-4xl font-normal text-foreground sm:text-5xl" data-en={copy.en.contact} data-km={copy.km.contact}>{copy.en.contact}</h2>
+              <h2 data-reveal-item class="text-4xl font-normal text-foreground sm:text-5xl" data-en={copy.en.contact} data-km={copy.km.contact}>{copy.en.contact}</h2>
             </div>
             <div class="mx-auto max-w-3xl space-y-12">
               <p
-                class="text-center text-lg font-normal leading-relaxed text-foreground/65"
+                data-reveal-item
+                class="text-center text-lg font-normal leading-relaxed text-body"
                 data-en={copy.en.contactDescription}
                 data-km={copy.km.contactDescription}
               >
                 {copy.en.contactDescription}
               </p>
-              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2" data-reveal-item style="--reveal-delay: 90ms">
                 <a
                   href="mailto:cheadara133@gmail.com"
-                  class="group flex items-center gap-4 rounded-lg border border-border/70 bg-card/60 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-sm sm:p-6"
+                  class="group flex items-center gap-4 rounded-lg border border-border/70 bg-card/60 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-soft hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-sm sm:p-6"
                 >
                   <div class="flex-shrink-0">
-                    <Mail class="w-6 h-6 text-foreground/80 group-hover:text-foreground transition-colors" />
+                    <Mail class="w-6 h-6 text-strong group-hover:text-foreground transition-colors" />
                   </div>
                   <div class="min-w-0">
-                    <p class="mb-0.5 text-xs font-medium uppercase text-foreground/45" data-en={copy.en.email} data-km={copy.km.email}>{copy.en.email}</p>
+                    <p class="mb-0.5 text-xs font-medium uppercase text-muted-foreground" data-en={copy.en.email} data-km={copy.km.email}>{copy.en.email}</p>
                     <span class="truncate text-sm font-semibold text-foreground">cheadara133@gmail.com</span>
                   </div>
                 </a>
@@ -604,30 +622,30 @@ const copy = {
                   href="https://www.linkedin.com/in/chea-ilong-88bb83333/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group flex items-center gap-4 rounded-lg border border-border/70 bg-card/60 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-sm sm:p-6"
+                  class="group flex items-center gap-4 rounded-lg border border-border/70 bg-card/60 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-soft hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-sm sm:p-6"
                   aria-label="LinkedIn"
                 >
-                  <BrandIcon name="linkedin" class="h-6 w-6 flex-shrink-0 text-foreground/80 transition-colors group-hover:text-foreground" />
+                  <BrandIcon name="linkedin" class="h-6 w-6 flex-shrink-0 text-strong transition-colors group-hover:text-foreground" />
                   <span class="text-sm font-semibold text-foreground">LinkedIn</span>
                 </a>
                 <a
                   href="https://github.com/Chea-Ilong"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group flex items-center gap-4 rounded-lg border border-border/70 bg-card/60 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-sm sm:p-6"
+                  class="group flex items-center gap-4 rounded-lg border border-border/70 bg-card/60 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-soft hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-sm sm:p-6"
                   aria-label="GitHub"
                 >
-                  <BrandIcon name="github" class="h-6 w-6 flex-shrink-0 text-foreground/80 transition-colors group-hover:text-foreground" />
+                  <BrandIcon name="github" class="h-6 w-6 flex-shrink-0 text-strong transition-colors group-hover:text-foreground" />
                   <span class="text-sm font-semibold text-foreground">GitHub</span>
                 </a>
                 <a
                   href="https://t.me/Chea_Ilong"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group flex items-center gap-4 rounded-lg border border-border/70 bg-card/60 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-sm sm:p-6"
+                  class="group flex items-center gap-4 rounded-lg border border-border/70 bg-card/60 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-soft hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-sm sm:p-6"
                   aria-label="Telegram"
                 >
-                  <Send class="w-6 h-6 flex-shrink-0 text-foreground/80 group-hover:text-foreground transition-colors" />
+                  <Send class="w-6 h-6 flex-shrink-0 text-strong group-hover:text-foreground transition-colors" />
                   <span class="text-sm font-semibold text-foreground">Telegram</span>
                 </a>
               </div>
@@ -642,8 +660,8 @@ const copy = {
     <footer class="border-t border-border/70 bg-background px-5 py-12 sm:px-8">
       <div class="mx-auto max-w-6xl">
         <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
-          <p class="text-sm font-light text-foreground/70" data-en={copy.en.copyright} data-km={copy.km.copyright}>{copy.en.copyright}</p>
-          <div class="flex gap-8 text-sm font-light text-foreground/70">
+          <p class="text-sm font-light text-body" data-en={copy.en.copyright} data-km={copy.km.copyright}>{copy.en.copyright}</p>
+          <div class="flex gap-8 text-sm font-light text-body">
             <a href="#" class="transition-colors hover:text-foreground" data-en={copy.en.privacy} data-km={copy.km.privacy}>{copy.en.privacy}</a>
             <a href="#" class="transition-colors hover:text-foreground" data-en={copy.en.terms} data-km={copy.km.terms}>{copy.en.terms}</a>
           </div>
@@ -660,6 +678,25 @@ const copy = {
     const languageIndicator = document.querySelector<HTMLElement>('#language-indicator');
     const englishLabel = document.querySelector<HTMLElement>('#language-en');
     const khmerLabel = document.querySelector<HTMLElement>('#language-km');
+
+    const STORAGE_KEY = 'preferred-language';
+
+    const rememberLanguage = (language: Language) => {
+      try {
+        localStorage.setItem(STORAGE_KEY, language);
+      } catch {
+        // Storage can be unavailable (private mode, blocked cookies) — the toggle still works.
+      }
+    };
+
+    const storedLanguage = (): Language | null => {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        return stored === 'en' || stored === 'km' ? stored : null;
+      } catch {
+        return null;
+      }
+    };
 
     const setLanguage = (language: Language) => {
       root.lang = language;
@@ -678,28 +715,80 @@ const copy = {
       khmerLabel?.classList.toggle('text-muted-foreground', language === 'en');
     };
 
-    languageToggle?.addEventListener('click', () => {
-      setLanguage(root.lang === 'km' ? 'en' : 'km');
-    });
-
     const navLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]')];
     const sections = navLinks
       .map((link) => document.getElementById(link.dataset.navLink ?? ''))
       .filter((section): section is HTMLElement => Boolean(section));
 
     const updateActiveNav = () => {
-      let activeSection = sections[0]?.id;
-      for (const section of sections) {
-        if (section.getBoundingClientRect().top <= 100) activeSection = section.id;
+      // The last section is shorter than the remaining scroll room, so its top never
+      // reaches the 100px line — without this the nav still reads "Projects" when you
+      // are looking at Contact at the very bottom of the page.
+      // `scrollY > 0` guards the case where the whole page fits on screen: without it
+      // the last link would be highlighted while you are looking at the top.
+      const atBottom =
+        window.scrollY > 0 &&
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+      let activeSection = atBottom ? sections[sections.length - 1]?.id : sections[0]?.id;
+      if (!atBottom) {
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top <= 100) activeSection = section.id;
+        }
       }
       for (const link of navLinks) {
         const active = link.dataset.navLink === activeSection;
         link.classList.toggle('text-foreground', active);
         link.classList.toggle('text-muted-foreground', !active);
+        link.classList.toggle('is-active', active);
       }
     };
 
-    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    // Coalesce to one recalculation per frame — scroll fires far faster than paint.
+    let navFrame = 0;
+    const scheduleNavUpdate = () => {
+      if (navFrame) return;
+      navFrame = requestAnimationFrame(() => {
+        navFrame = 0;
+        updateActiveNav();
+      });
+    };
+
+    window.addEventListener('scroll', scheduleNavUpdate, { passive: true });
+
+    if (root.dataset.reveal !== undefined) {
+      const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal-item]');
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              entry.target.classList.add('is-revealed');
+              observer.unobserve(entry.target);
+            }
+          },
+          // Fire a little before the element is fully in view, so the motion has
+          // finished by the time it reaches comfortable reading position.
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
+        );
+        revealItems.forEach((item) => observer.observe(item));
+      } else {
+        delete root.dataset.reveal;
+      }
+    }
+
+    languageToggle?.addEventListener('click', () => {
+      const language = root.lang === 'km' ? 'en' : 'km';
+      setLanguage(language);
+      rememberLanguage(language);
+      // Swapping copy reflows every section, so the active link must be recomputed —
+      // no scroll event fires on its own.
+      updateActiveNav();
+    });
+
+    const preferred = storedLanguage();
+    if (preferred && preferred !== root.lang) setLanguage(preferred);
     updateActiveNav();
   </script>
 </BaseLayout>

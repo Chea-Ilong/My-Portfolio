@@ -1,123 +1,76 @@
 @import 'tailwindcss';
 
-:root {
-  --background: oklch(0.988 0.002 250);
-  --foreground: oklch(0.16 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.16 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.16 0 0);
-  --primary: oklch(0.16 0 0);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.40 0 0);
-  --secondary-foreground: oklch(0.998 0 0);
-  --muted: oklch(0.955 0.003 250);
-  --muted-foreground: oklch(0.46 0 0);
-  --accent: oklch(0.18 0 0);
-  --accent-foreground: oklch(0.998 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.9 0.003 250);
-  --input: oklch(0.9 0.003 250);
-  --ring: oklch(0.52 0.06 60);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.5rem;
-  --sidebar: oklch(0.97 0.007 80);
-  --sidebar-foreground: oklch(0.15 0 0);
-  --sidebar-primary: oklch(0.15 0 0);
-  --sidebar-primary-foreground: oklch(0.97 0.007 80);
-  --sidebar-accent: oklch(0.88 0 0);
-  --sidebar-accent-foreground: oklch(0.15 0 0);
-  --sidebar-border: oklch(0.92 0 0);
-  --sidebar-ring: oklch(0.15 0 0);
+/* Metric-matched fallback: keeps the pre-swap paint the same size as Geist so the
+   webfont swapping in does not reflow the page. Overrides are computed from Geist's
+   own metrics (upem 1000, typo asc 1005 / desc -295 / gap 0) against Arial's
+   (upem 2048, hhea asc 1854 / desc -434 / gap 67), size-adjust from the
+   frequency-weighted average advance width — the same math next/font used. */
+@font-face {
+  font-family: 'Geist Fallback';
+  src: local('Liberation Sans'), local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  size-adjust: 105.84%;
+  ascent-override: 94.96%;
+  descent-override: 27.87%;
+  line-gap-override: 0%;
 }
 
-.dark {
-  --background: oklch(0.15 0 0);
-  --foreground: oklch(0.97 0.007 80);
-  --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.97 0.007 80);
-  --popover: oklch(0.15 0 0);
-  --popover-foreground: oklch(0.97 0.007 80);
-  --primary: oklch(0.97 0.007 80);
-  --primary-foreground: oklch(0.15 0 0);
-  --secondary: oklch(0.7 0 0);
-  --secondary-foreground: oklch(0.15 0 0);
-  --muted: oklch(0.35 0 0);
-  --muted-foreground: oklch(0.7 0 0);
-  --accent: oklch(0.97 0.007 80);
-  --accent-foreground: oklch(0.15 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.3 0 0);
-  --input: oklch(0.3 0 0);
-  --ring: oklch(0.97 0.007 80);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.15 0 0);
-  --sidebar-foreground: oklch(0.97 0.007 80);
-  --sidebar-primary: oklch(0.97 0.007 80);
-  --sidebar-primary-foreground: oklch(0.15 0 0);
-  --sidebar-accent: oklch(0.35 0 0);
-  --sidebar-accent-foreground: oklch(0.97 0.007 80);
-  --sidebar-border: oklch(0.3 0 0);
-  --sidebar-ring: oklch(0.97 0.007 80);
+:root {
+  --background: oklch(0.988 0.002 250);
+  --card: oklch(1 0 0);
+  --muted: oklch(0.955 0.003 250);
+  --border: oklch(0.9 0.003 250);
+  --ring: oklch(0.52 0.06 60);
+  --radius: 0.5rem;
+
+  /* Four deliberate text tones instead of ad-hoc `text-foreground/NN` opacities.
+     These are solid colors, so a tone reads identically on white cards and on the
+     tinted `bg-muted/20` bands — translucent text does not. Each step is a real
+     perceptual gap, which is what gives the page its hierarchy:
+       foreground  headings, names, the one thing a section is about
+       strong      emphasis inside a block (roles, taglines, icons)
+       body        running prose
+       meta        eyebrows, dates, tags, inactive nav */
+  --foreground: oklch(0.16 0 0);
+  --strong: oklch(0.3 0 0);
+  --body: oklch(0.44 0 0);
+  --muted-foreground: oklch(0.52 0 0);
+
+  /* One easing for everything that moves: a gentle decelerate that settles rather
+     than stopping dead. `ease-out` on some elements and nothing on others is what
+     made the page feel uneven. Exposed to utilities below as `ease-soft`. */
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
-  --font-sans: 'Geist Variable', 'Geist', sans-serif;
-  --font-mono: 'Geist Mono', monospace;
+  --font-sans: 'Geist Variable', 'Geist', 'Geist Fallback', sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-strong: var(--strong);
+  --color-body: var(--body);
   --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
-  --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+  --ease-soft: var(--motion-ease);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    letter-spacing: 0 !important;
+    letter-spacing: 0;
   }
-  
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
@@ -127,21 +80,39 @@
     @apply bg-background text-foreground;
     text-rendering: optimizeLegibility;
   }
-  
+
   h1 {
     @apply text-5xl sm:text-6xl lg:text-6xl font-light leading-tight text-foreground;
   }
-  
+
   h2 {
     @apply text-3xl sm:text-4xl font-light leading-tight text-foreground;
   }
-  
+
   h3 {
     @apply text-lg sm:text-xl font-light text-foreground;
   }
-  
+
   p {
     @apply leading-relaxed;
+    text-wrap: pretty;
+  }
+
+  /* Keeps headings from breaking one or two words onto a lonely last line. */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  /* Large Latin display type sets too loose at its default tracking. Scoped to
+     lang=en — Khmer glyphs need their natural spacing and must not be tightened. */
+  html[lang='en'] .hero-heading {
+    letter-spacing: -0.025em;
+  }
+
+  html[lang='en'] h2 {
+    letter-spacing: -0.015em;
   }
 
   a {
@@ -150,10 +121,6 @@
 
   section {
     @apply scroll-mt-20;
-  }
-
-  html[lang='km'] .hero-heading {
-    @apply text-4xl leading-[1.45] sm:text-5xl lg:text-6xl xl:text-7xl;
   }
 
   ::selection {
@@ -176,24 +143,59 @@
   }
 }
 
-@layer components {
-  .skill-tag {
-    @apply px-3 py-1.5 border border-border text-xs font-light hover:border-accent hover:text-accent transition-colors duration-300;
+/* Khmer glyphs stack taller than Latin, so the hero drops a size step and gains
+   leading. This has to stay OUTSIDE @layer: the heading carries its own
+   `text-5xl … xl:text-8xl leading-[1.04]` utilities, and Tailwind emits those in
+   @layer utilities — which beats @layer base no matter how specific the selector
+   is. Unlayered rules win over every layer, so this is the only placement that
+   actually takes effect. */
+html[lang='km'] .hero-heading {
+  @apply text-4xl leading-[1.45] sm:text-5xl lg:text-6xl xl:text-7xl;
+}
+
+/* Nav: a hairline that wipes in from the left on hover and stays put on the
+   section you are actually in. Colour alone was carrying that signal before. */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0.25rem;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--motion-ease);
+}
+
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* Khmer subscripts (្ញ, ុំ) hang well below the baseline and collide with the rule
+   at the Latin offset, so drop it clear of them. */
+html[lang='km'] .nav-link::after {
+  bottom: -0.15rem;
+}
+
+/* Scroll reveal. The hidden state is gated behind `data-reveal`, which only JS
+   sets — so with JS off, or if this script ever throws, every element is simply
+   visible rather than permanently blank. Reduced-motion users skip it entirely. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-reveal] [data-reveal-item] {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.7s var(--motion-ease) var(--reveal-delay, 0ms),
+      transform 0.7s var(--motion-ease) var(--reveal-delay, 0ms);
   }
 
-  .section-header {
-    @apply text-4xl sm:text-5xl font-light leading-tight;
-  }
-
-  .section-accent {
-    @apply h-1 w-12 bg-accent;
-  }
-
-  .cta-button {
-    @apply inline-flex items-center gap-3 px-6 py-3 border border-foreground hover:bg-foreground hover:text-background transition-colors duration-300 font-light;
-  }
-
-  .refined-link {
-    @apply font-light tracking-wide hover:text-accent transition-colors duration-300;
+  html[data-reveal] [data-reveal-item].is-revealed {
+    opacity: 1;
+    transform: none;
   }
 }
