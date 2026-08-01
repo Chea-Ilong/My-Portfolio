@@ -129,9 +129,13 @@ const jsonLd = [
 
     <!-- .ico first for clients that fetch /favicon.ico directly (link unfurlers, feed readers, crawlers). -->
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icons/icon-light-16x16.png" type="image/png" />
     <link rel="icon" href="/icons/icon-light-32x32.png" media="(prefers-color-scheme: light)" />
     <link rel="icon" href="/icons/icon-dark-32x32.png" media="(prefers-color-scheme: dark)" />
-    <link rel="icon" href="/icons/icon-light-16x16.png" type="image/png" />
+    <!-- Scalable, and it carries its own light/dark swap, so it is declared last: it
+         wins both in browsers that score icons by size and in the ones that simply
+         take the last <link> they can decode. Non-SVG clients fall back above. -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
     <link rel="apple-touch-icon" href="/icons/apple-icon.png" />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

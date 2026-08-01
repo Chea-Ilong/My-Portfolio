@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json.schemastore.org/vscode-css-customdata.json",
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@theme",
+      "description": "Tailwind v4. Declares design tokens as CSS variables; each one also generates the matching utility (`--color-strong` gives `text-strong`). `@theme inline` emits the value as written instead of resolving it, which is what lets a token point at another custom property.",
+      "references": [
+        { "name": "Tailwind docs", "url": "https://tailwindcss.com/docs/functions-and-directives#theme-directive" }
+      ]
+    },
+    {
+      "name": "@apply",
+      "description": "Tailwind. Inlines the declarations of the listed utility classes into the current rule. Used here inside `@layer base` so element defaults share one source of truth with the utilities.",
+      "references": [
+        { "name": "Tailwind docs", "url": "https://tailwindcss.com/docs/functions-and-directives#apply-directive" }
+      ]
+    },
+    {
+      "name": "@source",
+      "description": "Tailwind v4. Registers an extra path for class detection, for template files outside the automatically scanned set.",
+      "references": [
+        { "name": "Tailwind docs", "url": "https://tailwindcss.com/docs/functions-and-directives#source-directive" }
+      ]
+    },
+    {
+      "name": "@utility",
+      "description": "Tailwind v4. Defines a custom utility that participates in variants (`hover:`, `md:`) like a built-in one.",
+      "references": [
+        { "name": "Tailwind docs", "url": "https://tailwindcss.com/docs/functions-and-directives#utility-directive" }
+      ]
+    },
+    {
+      "name": "@variant",
+      "description": "Tailwind v4. Applies an existing variant's condition to the rules inside it.",
+      "references": [
+        { "name": "Tailwind docs", "url": "https://tailwindcss.com/docs/functions-and-directives#variant-directive" }
+      ]
+    },
+    {
+      "name": "@custom-variant",
+      "description": "Tailwind v4. Defines a new variant that can then prefix any utility.",
+      "references": [
+        { "name": "Tailwind docs", "url": "https://tailwindcss.com/docs/functions-and-directives#custom-variant-directive" }
+      ]
+    },
+    {
+      "name": "@plugin",
+      "description": "Tailwind v4. Loads a JavaScript plugin, replacing the `plugins` array of the v3 config file.",
+      "references": [
+        { "name": "Tailwind docs", "url": "https://tailwindcss.com/docs/functions-and-directives#plugin-directive" }
+      ]
+    },
+    {
+      "name": "@config",
+      "description": "Tailwind v4. Points at a legacy JavaScript config file for projects still carrying one.",
+      "references": [
+        { "name": "Tailwind docs", "url": "https://tailwindcss.com/docs/functions-and-directives#config-directive" }
+      ]
+    },
+    {
+      "name": "@reference",
+      "description": "Tailwind v4. Imports another stylesheet's theme and utilities for reference only, so `@apply` resolves in a scoped stylesheet without duplicating the CSS output.",
+      "references": [
+        { "name": "Tailwind docs", "url": "https://tailwindcss.com/docs/functions-and-directives#reference-directive" }
+      ]
+    },
+    {
+      "name": "@tailwind",
+      "description": "Tailwind v3 and earlier. Injects a layer such as `base`, `components`, or `utilities`. v4 replaces all of these with a single `@import 'tailwindcss'`.",
+      "references": [
+        { "name": "Tailwind docs", "url": "https://tailwindcss.com/docs/functions-and-directives#tailwind-directive" }
+      ]
+    }
+  ]
+}

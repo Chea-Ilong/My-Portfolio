@@ -30,7 +30,7 @@
        strong      emphasis inside a block (roles, taglines, icons)
        body        running prose
        meta        eyebrows, dates, tags, inactive nav */
-  --foreground: oklch(0.16 0 0);
+  --foreground: oklch(0 0 0);
   --strong: oklch(0.3 0 0);
   --body: oklch(0.44 0 0);
   --muted-foreground: oklch(0.52 0 0);

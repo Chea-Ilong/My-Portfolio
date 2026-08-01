@@ -1,0 +1,11 @@
+{
+  // Teaches the built-in CSS validator the Tailwind v4 at-rules used in
+  // src/styles/global.css. Preferred over "css.lint.unknownAtRules": "ignore",
+  // which would also silence a genuinely misspelled at-rule.
+  // Changes to the custom data file need a window reload to take effect.
+  "css.customData": [".vscode/css-custom-data.json"],
+
+  // Tailwind IntelliSense reads tokens straight from the stylesheet in v4; there is
+  // no tailwind.config.js in this project, so point it at the entry stylesheet.
+  "tailwindCSS.experimental.configFile": "src/styles/global.css"
+}
