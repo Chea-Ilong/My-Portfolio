@@ -1,32 +1,39 @@
 ---
 import { Image } from 'astro:assets';
-import { ArrowRight, CodeXml as Code2, ExternalLink, Mail, Send } from '@lucide/astro';
+import { ArrowRight, ChevronsRight, Mail } from '@lucide/astro';
 import BrandIcon from '../components/BrandIcon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { homeProjectCount, projectId, projects } from '../data/projects';
+import { siteCopy, type Language } from '../data/site';
 import profileImage from '../assets/images/profile/chea-ilong.png';
+import schoolLinkLogo from '../assets/images/experience/school-link-logo.png';
 import actsmartImage from '../assets/images/experience/actsmart.jpeg';
 import turingHackathonImage from '../assets/images/experience/turing-hackathon.jpeg';
 import cadtNextGenImage from '../assets/images/experience/cadt-next-gen.jpg';
 import cadtCodingChampionshipImage from '../assets/images/experience/cadt-coding-championship.jpg';
 import youthEducationSupportsImage from '../assets/images/experience/youth-education-supports.jpg';
-import leakscopeImage from '../assets/images/projects/leakscope.png';
-import aureaImage from '../assets/images/projects/aurea.png';
-import phsarDesignImage from '../assets/images/projects/phsar-design.png';
-import roomRentalImage from '../assets/images/projects/room-rental.jpeg';
 
-interface NavItem {
-  label: Record<Language, string>;
-  href: string;
-}
-
-type Language = 'en' | 'km';
-
-const navItems: NavItem[] = [
-  { label: { en: 'About', km: 'អំពីខ្ញុំ' }, href: '#about' },
-  { label: { en: 'Experience', km: 'បទពិសោធន៍' }, href: '#experience' },
-  { label: { en: 'Skills', km: 'ជំនាញ' }, href: '#skills' },
-  { label: { en: 'Projects', km: 'គម្រោង' }, href: '#projects' },
-  { label: { en: 'Contact', km: 'ទំនាក់ទំនង' }, href: '#contact' },
+// Laid out like a LinkedIn position: role, company · type, dates · duration.
+const internships = [
+  {
+    role: 'Back End Developer',
+    roleKm: 'អ្នកអភិវឌ្ឍន៍ Back End',
+    company: 'School Link',
+    type: 'Internship',
+    typeKm: 'កម្មសិក្សា',
+    period: 'Apr 2026 - Aug 2026',
+    periodKm: 'មេសា 2026 - សីហា 2026',
+    duration: '5 mos',
+    durationKm: '5 ខែ',
+    description: 'Built the backend of ITAIMS, an IT Asset Inventory Management System for School Link, a cloud-based learning platform for schools. It replaces spreadsheet tracking with one system for hardware, software licenses, documents, and asset loans across multiple locations. I designed the PostgreSQL schema and built the REST API with Node.js and Express: authentication, user and location management with location-scoped admin access, custom asset fields, file uploads, license tracking, multi-asset loans, dashboard analytics, and search and filters, with unit and integration tests, delivered over a 12-week Agile cycle.',
+    descriptionKm: 'បានបង្កើតផ្នែក backend នៃ ITAIMS ដែលជាប្រព័ន្ធគ្រប់គ្រងសារពើភណ្ឌទ្រព្យសម្បត្តិ IT សម្រាប់ School Link ដែលជាវេទិកាសិក្សាលើ cloud សម្រាប់សាលារៀន។ ប្រព័ន្ធនេះជំនួសការតាមដានដោយ spreadsheet ដោយប្រព័ន្ធតែមួយសម្រាប់ផ្នែករឹង អាជ្ញាប័ណ្ណកម្មវិធី ឯកសារ និងការខ្ចីទ្រព្យសម្បត្តិនៅទីតាំងច្រើន។ ខ្ញុំបានរចនា schema PostgreSQL និងបង្កើត REST API ដោយប្រើ Node.js និង Express៖ ការផ្ទៀងផ្ទាត់អត្តសញ្ញាណ ការគ្រប់គ្រងអ្នកប្រើប្រាស់ និងទីតាំង ដោយ admin មានសិទ្ធិតែលើទីតាំងដែលបានកំណត់ វាលព័ត៌មានទ្រព្យសម្បត្តិតាមបំណង ការផ្ទុកឯកសារ ការតាមដានអាជ្ញាប័ណ្ណ ការខ្ចីទ្រព្យសម្បត្តិច្រើនក្នុងពេលតែមួយ ផ្ទាំងវិភាគ និងការស្វែងរក និងតម្រង ព្រមទាំងការធ្វើតេស្ត unit និង integration ក្នុងរយៈពេល 12 សប្តាហ៍តាមវិធីសាស្ត្រ Agile។',
+    highlights: ['Node.js', 'Express.js', 'PostgreSQL', 'REST API', 'Database Design'],
+    highlightsKm: ['Node.js', 'Express.js', 'PostgreSQL', 'REST API', 'ការរចនាមូលដ្ឋានទិន្នន័យ'],
+    logo: schoolLinkLogo,
+  },
 ];
 
 const experiences = [
@@ -92,56 +99,11 @@ const experiences = [
   },
 ];
 
-const projects = [
-  {
-    title: 'LeakScope',
-    description: 'LeakScope is an automated black-box security scanner that audits live Supabase applications for vulnerabilities by analyzing publicly exposed assets without requiring credentials. Engineered detection for leaked API keys, exposed database tables, broken Row Level Security policies, IDOR/BOLA vulnerabilities, and sensitive data leaks in endpoints and storage buckets.',
-    descriptionKm: 'LeakScope គឺជាឧបករណ៍ស្កេនសុវត្ថិភាព black-box ស្វ័យប្រវត្តិ ដែលត្រួតពិនិត្យកម្មវិធី Supabase កំពុងដំណើរការ ដោយវិភាគធនធានដែលបង្ហាញជាសាធារណៈ ដោយមិនត្រូវការព័ត៌មានចូលប្រើ។ ប្រព័ន្ធអាចរកឃើញ API key ដែលលេចធ្លាយ តារាងទិន្នន័យដែលបើកចំហ គោលការណ៍ Row Level Security ដែលខូច ចំណុចខ្សោយ IDOR/BOLA និងទិន្នន័យរសើបដែលលេចធ្លាយតាម endpoint និង storage bucket។',
-    tags: ['Next.js', 'React', 'TailwindCSS', 'TypeScript', 'PostgreSQL'],
-    year: '2026',
-    live: 'https://www.leakscope.tech/',
-    github: 'https://github.com/PromSereyreaksa/LeakScope',
-    highlights: 'One URL. Full audit path.',
-    highlightsKm: 'URL តែមួយ។ ផ្លូវត្រួតពិនិត្យពេញលេញ។',
-    image: leakscopeImage,
-  },
-  {
-    title: 'AUREA',
-    description: 'An easy, fast, and efficient website builder designed for creatives to build stunning portfolios with a flexible template system. AUREA removes the hassle of website setup, saves time, and lets designers focus on their craft instead of technical complexities.',
-    descriptionKm: 'ឧបករណ៍បង្កើតគេហទំព័រដែលងាយស្រួល លឿន និងមានប្រសិទ្ធភាព សម្រាប់អ្នកច្នៃប្រឌិតបង្កើត portfolio ដ៏ស្រស់ស្អាតជាមួយប្រព័ន្ធ template ដែលបត់បែនបាន។ AUREA កាត់បន្ថយភាពស្មុគស្មាញក្នុងការរៀបចំគេហទំព័រ សន្សំពេលវេលា និងអនុញ្ញាតឱ្យអ្នករចនាផ្តោតលើស្នាដៃជំនួសឱ្យបញ្ហាបច្ចេកទេស។',
-    tags: ['Next.js', 'React', 'TailwindCSS', 'TypeScript', 'PostgreSQL'],
-    year: '2025',
-    live: 'https://www.aurea.tools/',
-    github: 'https://github.com/imposter-dot-com/AUREA---Backend',
-    highlights: 'Portfolio Builder for Creatives',
-    highlightsKm: 'ឧបករណ៍បង្កើត Portfolio សម្រាប់អ្នកច្នៃប្រឌិត',
-    image: aureaImage,
-  },
-  {
-    title: 'PhsarDesign',
-    description: 'Co-founded a creative freelancing platform for freelance digital artists to showcase their work, find job opportunities, and for clients to discover and hire creative talent. A thriving community connecting creators with opportunities.',
-    descriptionKm: 'បានចូលរួមសហស្ថាបនាវេទិកាការងារឯករាជ្យសម្រាប់សិល្បករឌីជីថលបង្ហាញស្នាដៃ ស្វែងរកឱកាសការងារ និងសម្រាប់អតិថិជនស្វែងរក និងជួលអ្នកមានទេពកោសល្យច្នៃប្រឌិត។ ជាសហគមន៍ដែលភ្ជាប់អ្នកបង្កើតជាមួយឱកាសការងារ។',
-    tags: ['React', 'Node.js', 'MongoDB', 'Express'],
-    year: '2025',
-    live: 'https://phsardesign.vercel.app/',
-    github: 'https://github.com/PromSereyreaksa/PhsarDesign',
-    highlights: 'Creative Freelancing Platform',
-    highlightsKm: 'វេទិកាការងារឯករាជ្យសម្រាប់អ្នកច្នៃប្រឌិត',
-    image: phsarDesignImage,
-  },
-  {
-    title: 'Room Rental Management System',
-    description: 'A comprehensive full-stack Java desktop application for managing room rentals with separate portals for landlords and tenants. Features role-based access, property management (buildings, floors, rooms), automated billing, and payment tracking built using Java Swing GUI and MySQL backend with OOP principles and MVC architecture.',
-    descriptionKm: 'កម្មវិធី desktop Java full-stack សម្រាប់គ្រប់គ្រងការជួលបន្ទប់ ជាមួយផ្ទាំងប្រើប្រាស់ដាច់ដោយឡែកសម្រាប់ម្ចាស់ផ្ទះ និងអ្នកជួល។ មានការគ្រប់គ្រងសិទ្ធិតាមតួនាទី ការគ្រប់គ្រងអចលនទ្រព្យ (អគារ ជាន់ និងបន្ទប់) វិក្កយបត្រស្វ័យប្រវត្តិ និងការតាមដានការទូទាត់ ដោយប្រើ Java Swing GUI និង MySQL backend តាមគោលការណ៍ OOP និងស្ថាបត្យកម្ម MVC។',
-    tags: ['Java', 'Swing', 'MySQL', 'OOP', 'MVC', 'DAO'],
-    year: '2025',
-    live: null,
-    github: 'https://github.com/Chea-Ilong/FullStack-Room-Rental-Management-System',
-    highlights: 'Full-Stack Java Desktop Application',
-    highlightsKm: 'កម្មវិធី Desktop Java Full-Stack',
-    image: roomRentalImage,
-  },
-];
+const heroSocials = [
+  { label: 'GitHub', href: 'https://github.com/Chea-Ilong', icon: 'github' },
+  { label: 'Telegram', href: 'https://t.me/Chea_Ilong', icon: 'telegram' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/chea-ilong-88bb83333/', icon: 'linkedin' },
+] as const;
 
 const skills = [
   {
@@ -198,7 +160,6 @@ const skills = [
 
 const copy = {
   en: {
-    role: 'Full-Stack Developer',
     heroLine1: "Hi, I'm",
     heroLine2: 'Chea Ilong',
     heroDescription: 'A dedicated Software Engineer crafting elegant digital solutions. I specialize in full-stack development, startup innovation, and turning ideas into deployable products.',
@@ -211,19 +172,15 @@ const copy = {
     currentWork: 'LeakScope - Supabase security scanner.',
     learning: 'Learning',
     learningValue: 'Software development and AWS cloud fundamentals',
-    experience: 'Experience',
+    internshipExperience: 'Internship Experience',
+    volunteerExperience: 'Volunteer Experience',
     skills: 'Skills',
     projects: 'Projects',
     contact: 'Get in touch',
     contactDescription: "I'm always interested in hearing about new projects and opportunities. Whether you want to discuss a potential collaboration, have a question, or simply want to say hello, feel free to reach out.",
     email: 'Email',
-    privacy: 'Privacy',
-    terms: 'Terms',
-    copyright: '© 2025 Chea Ilong. All rights reserved.',
-    languageLabel: 'Change language',
   },
   km: {
-    role: 'អ្នកអភិវឌ្ឍន៍ Full-Stack',
     heroLine1: 'សួស្តី ខ្ញុំឈ្មោះ',
     heroLine2: 'ជា អ៊ីឡុង',
     heroDescription: 'ខ្ញុំជាវិស្វករកម្មវិធីដែលផ្តោតលើការបង្កើតដំណោះស្រាយឌីជីថលប្រកបដោយគុណភាព។ ខ្ញុំមានជំនាញក្នុងការអភិវឌ្ឍ full-stack នវានុវត្តន៍ស្តាតអាប់ និងការប្រែក្លាយគំនិតទៅជាផលិតផលដែលអាចដាក់ឱ្យប្រើប្រាស់បាន។',
@@ -236,16 +193,13 @@ const copy = {
     currentWork: 'LeakScope - ឧបករណ៍ស្កេនសុវត្ថិភាព Supabase។',
     learning: 'កំពុងសិក្សា',
     learningValue: 'ការអភិវឌ្ឍកម្មវិធី និងមូលដ្ឋានគ្រឹះ AWS Cloud',
-    experience: 'បទពិសោធន៍',
+    internshipExperience: 'បទពិសោធន៍កម្មសិក្សា',
+    volunteerExperience: 'បទពិសោធន៍ស្ម័គ្រចិត្ត',
     skills: 'ជំនាញ',
     projects: 'គម្រោង',
     contact: 'ទាក់ទងមកខ្ញុំ',
     contactDescription: 'ខ្ញុំតែងតែចាប់អារម្មណ៍ក្នុងការស្វែងយល់អំពីគម្រោង និងឱកាសថ្មីៗ។ ប្រសិនបើអ្នកចង់ពិភាក្សាអំពីកិច្ចសហការ មានសំណួរ ឬគ្រាន់តែចង់សួរសុខទុក្ខ សូមទាក់ទងមកខ្ញុំដោយសេរី។',
     email: 'អ៊ីមែល',
-    privacy: 'ឯកជនភាព',
-    terms: 'លក្ខខណ្ឌ',
-    copyright: '© 2025 Chea Ilong។ រក្សាសិទ្ធិគ្រប់យ៉ាង។',
-    languageLabel: 'ប្តូរភាសា',
   },
 } satisfies Record<Language, Record<string, string>>;
 
@@ -254,73 +208,7 @@ const copy = {
 <BaseLayout>
   <div class="min-h-screen overflow-x-clip bg-background text-foreground antialiased">
     <main>
-      <!-- Navigation -->
-      <!-- Padding on the header, max-width on the nav: the same nesting every section
-           uses. Putting both on one element would make `max-w-6xl` border-box the
-           padding away, insetting the wordmark 32px from the content edge below. -->
-      <header
-        class="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/85 px-5 backdrop-blur-md sm:px-8"
-      >
-        <nav class="mx-auto flex h-20 max-w-6xl items-center justify-between">
-          <!-- Set to match the nav links exactly: same text-base, same inherited normal
-               weight, same colour transition. It only steps down to text-sm below sm,
-               where the links are hidden anyway and the full-size label wrapped onto
-               two lines inside the h-20 bar. -->
-          <a
-            href="#"
-            class="whitespace-nowrap text-sm text-foreground transition-colors duration-300 ease-soft hover:text-muted-foreground sm:text-base"
-            data-en={copy.en.role}
-            data-km={copy.km.role}
-          >
-            {copy.en.role}
-          </a>
-          <div class="flex items-center gap-4 lg:gap-7">
-            <div class="hidden items-center gap-6 md:flex lg:gap-7">
-              {navItems.map((item, index) => (
-                <a
-                  href={item.href}
-                  data-nav-link={item.href.slice(1)}
-                  data-en={item.label.en}
-                  data-km={item.label.km}
-                  class={`nav-link py-2 text-base transition-colors duration-300 ease-soft hover:text-foreground ${
-                    index === 0 ? 'text-foreground is-active' : 'text-muted-foreground'
-                  }`}
-                >
-                  {item.label.en}
-                </a>
-              ))}
-            </div>
-            <button
-              id="language-toggle"
-              type="button"
-              role="switch"
-              aria-checked="false"
-              aria-label={copy.en.languageLabel}
-              data-aria-en={copy.en.languageLabel}
-              data-aria-km={copy.km.languageLabel}
-              class="relative grid h-10 w-32 grid-cols-2 rounded-lg border border-border bg-card p-0.5"
-            >
-              <span
-                id="language-indicator"
-                aria-hidden="true"
-                class="absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] translate-x-0 rounded-md bg-foreground transition-transform duration-300 ease-soft"
-              />
-              <span
-                id="language-en"
-                class="relative z-10 flex items-center justify-center rounded-md text-sm font-medium leading-none text-background transition-colors duration-300 ease-soft"
-              >
-                English
-              </span>
-              <span
-                id="language-km"
-                class="relative z-10 flex items-center justify-center rounded-md text-sm font-medium leading-none text-muted-foreground transition-colors duration-300 ease-soft"
-              >
-                ខ្មែរ
-              </span>
-            </button>
-          </div>
-        </nav>
-      </header>
+      <SiteHeader page="home" />
 
       <!-- Hero Section with Profile -->
       <section class="px-5 pb-28 pt-36 sm:px-8 sm:pb-32 sm:pt-40 lg:pb-40 lg:pt-44">
@@ -360,6 +248,19 @@ const copy = {
                 >
                   {copy.en.contactMe}
                 </a>
+              </div>
+              <div class="flex items-center gap-2" data-reveal-item style="--reveal-delay: 240ms">
+                {heroSocials.map((social) => (
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    class="grid h-11 w-11 place-items-center rounded-lg border border-border bg-card text-strong transition-[background-color,border-color,color,transform] duration-300 ease-soft hover:-translate-y-px hover:border-foreground/25 hover:bg-muted/40 hover:text-foreground"
+                  >
+                    <BrandIcon name={social.icon} class="h-5 w-5" />
+                  </a>
+                ))}
               </div>
             </div>
             <div class="flex justify-center md:justify-end" data-reveal-item style="--reveal-delay: 120ms">
@@ -406,10 +307,64 @@ const copy = {
 
       <!-- Experience Section -->
       <section id="experience" class="border-t border-border/70 bg-background px-5 py-24 sm:px-8 sm:py-32">
-        <div class="mx-auto max-w-6xl">
+        <div class="mx-auto max-w-6xl space-y-24 sm:space-y-32">
+          <!-- Internship -->
           <div class="space-y-14">
             <div class="text-center">
-              <h2 data-reveal-item class="text-4xl font-normal text-foreground sm:text-5xl" data-en={copy.en.experience} data-km={copy.km.experience}>{copy.en.experience}</h2>
+              <h2 data-reveal-item class="text-4xl font-normal text-foreground sm:text-5xl" data-en={copy.en.internshipExperience} data-km={copy.km.internshipExperience}>{copy.en.internshipExperience}</h2>
+            </div>
+            <div class="space-y-8">
+              {internships.map((job) => (
+                <div
+                  data-reveal-item
+                  class="group rounded-lg border border-border/60 bg-card/50 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-soft hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-[0_14px_40px_rgba(0,0,0,0.055)] sm:p-6"
+                >
+                  <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                      <Image
+                        src={job.logo}
+                        alt={`${job.company} logo`}
+                        widths={[56, 112]}
+                        sizes="56px"
+                        class="h-14 w-14 shrink-0 rounded-md border border-border/60 bg-white object-contain"
+                        loading="lazy"
+                      />
+                      <div class="space-y-1">
+                        <h3 class="text-xl font-semibold text-foreground sm:text-2xl" data-en={job.role} data-km={job.roleKm}>{job.role}</h3>
+                        <!-- Translated parts are their own spans: textContent swaps
+                             would wipe the separator and the untranslated name. -->
+                        <p class="text-base text-strong">
+                          {job.company} · <span data-en={job.type} data-km={job.typeKm}>{job.type}</span>
+                        </p>
+                        <p class="text-sm tabular-nums text-muted-foreground">
+                          <span data-en={job.period} data-km={job.periodKm}>{job.period}</span> · <span data-en={job.duration} data-km={job.durationKm}>{job.duration}</span>
+                        </p>
+                      </div>
+                    </div>
+                    <p class="text-base font-normal leading-relaxed text-body" data-en={job.description} data-km={job.descriptionKm}>
+                      {job.description}
+                    </p>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                      {job.highlights.map((highlight, index) => (
+                        <span
+                          class="rounded-md border border-border/60 bg-muted/50 px-2.5 py-1 text-xs font-medium text-muted-foreground"
+                          data-en={highlight}
+                          data-km={job.highlightsKm[index]}
+                        >
+                          {highlight}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Volunteer -->
+          <div class="space-y-14">
+            <div class="text-center">
+              <h2 data-reveal-item class="text-4xl font-normal text-foreground sm:text-5xl" data-en={copy.en.volunteerExperience} data-km={copy.km.volunteerExperience}>{copy.en.volunteerExperience}</h2>
             </div>
             <div class="relative">
               <div class="space-y-8">
@@ -500,8 +455,36 @@ const copy = {
         </div>
       </section>
 
+      <!-- Projects Section -->
+      <section id="projects" class="border-t border-border/70 bg-muted/20 px-5 py-24 sm:px-8 sm:py-32">
+        <div class="mx-auto max-w-6xl">
+          <div class="space-y-14">
+            <div class="text-center">
+              <h2 data-reveal-item class="text-4xl font-normal text-foreground sm:text-5xl" data-en={copy.en.projects} data-km={copy.km.projects}>{copy.en.projects}</h2>
+            </div>
+            <div class="space-y-8">
+              {projects.slice(0, homeProjectCount).map((project, index) => (
+                <ProjectCard project={project} index={index} />
+              ))}
+            </div>
+            {projects.length > homeProjectCount && (
+              <div class="flex justify-center" data-reveal-item>
+                <!-- Lands on the first project the home page left out, not the top of the list. -->
+                <a
+                  href={`/projects/#${projectId(projects[homeProjectCount])}`}
+                  class="group inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 text-sm font-medium uppercase text-background transition-[background-color,transform] duration-300 ease-soft hover:-translate-y-px hover:bg-foreground/85 [html[lang='en']_&]:tracking-wide"
+                >
+                  <span data-en={siteCopy.en.seeMore} data-km={siteCopy.km.seeMore}>{siteCopy.en.seeMore}</span>
+                  <ChevronsRight class="h-4 w-4 transition-transform duration-300 ease-soft group-hover:translate-x-0.5" />
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
       <!-- Skills Section -->
-      <section id="skills" class="border-t border-border/70 bg-muted/20 px-5 py-24 sm:px-8 sm:py-32">
+      <section id="skills" class="border-t border-border/70 bg-background px-5 py-24 sm:px-8 sm:py-32">
         <div class="mx-auto max-w-6xl">
           <div class="space-y-14">
             <div class="text-center">
@@ -535,91 +518,6 @@ const copy = {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Projects Section -->
-      <section id="projects" class="border-t border-border/70 bg-background px-5 py-24 sm:px-8 sm:py-32">
-        <div class="mx-auto max-w-6xl">
-          <div class="space-y-14">
-            <div class="text-center">
-              <h2 data-reveal-item class="text-4xl font-normal text-foreground sm:text-5xl" data-en={copy.en.projects} data-km={copy.km.projects}>{copy.en.projects}</h2>
-            </div>
-            <div class="space-y-8">
-              {projects.map((project, index) => {
-                const image = project.image ? (
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    widths={[600, 1200]}
-                    sizes="(max-width: 768px) 100vw, 600px"
-                    class="h-full w-full object-cover transition-transform duration-500 ease-soft group-hover/image:scale-[1.015]"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div class="flex h-full w-full items-center justify-center">
-                    <Code2 class="h-12 w-12 text-muted-foreground/30" />
-                  </div>
-                );
-
-                return (
-                  <article
-                    data-reveal-item
-                    style={`--reveal-delay: ${(index % 2) * 70}ms`}
-                    class="group block rounded-lg border border-border/60 bg-card/50 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-soft hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-[0_14px_40px_rgba(0,0,0,0.055)] sm:p-8"
-                  >
-                    <div class="grid items-center gap-8 md:grid-cols-2 lg:gap-12">
-                      {project.live ? (
-                        <a
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`Open the live ${project.title} project`}
-                          data-aria-en={`Open the live ${project.title} project`}
-                          data-aria-km={`បើកគម្រោង ${project.title}`}
-                          class={`group/image relative h-56 overflow-hidden rounded-md border border-border/60 bg-muted/20 sm:h-72 lg:h-80 ${index % 2 === 1 ? 'md:order-2' : ''}`}
-                        >
-                          {image}
-                          <span class="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-md border border-white/30 bg-black/65 text-white opacity-0 transition-opacity duration-300 ease-soft group-hover/image:opacity-100 group-focus-visible/image:opacity-100">
-                            <ExternalLink class="h-4 w-4" />
-                          </span>
-                        </a>
-                      ) : (
-                        <div class={`relative h-56 overflow-hidden rounded-md border border-border/60 bg-muted/20 sm:h-72 lg:h-80 ${index % 2 === 1 ? 'md:order-2' : ''}`}>
-                          {image}
-                        </div>
-                      )}
-
-                      <div class={`space-y-6 ${index % 2 === 1 ? 'md:order-1' : ''}`}>
-                        <p class="text-xs font-medium uppercase tabular-nums text-muted-foreground">{project.year}</p>
-                        <h3 class="text-3xl font-semibold text-foreground sm:text-4xl">{project.title}</h3>
-                        <p class="text-base leading-relaxed text-body" data-en={project.description} data-km={project.descriptionKm}>{project.description}</p>
-                        <div class="flex flex-wrap gap-3">
-                          {project.tags.map((tag) => (
-                            <span class="rounded-md border border-border/70 bg-transparent px-2.5 py-1 text-xs font-normal text-muted-foreground">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                        <div class="flex items-center justify-between gap-4 pt-4">
-                          <p class="text-sm font-semibold text-strong" data-en={project.highlights} data-km={project.highlightsKm}>{project.highlights}</p>
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="flex shrink-0 items-center gap-1.5 text-sm font-semibold text-foreground transition-opacity duration-300 ease-soft hover:opacity-60"
-                          >
-                            <BrandIcon name="github" class="h-4 w-4" />
-                            GitHub
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
             </div>
           </div>
         </div>
@@ -681,7 +579,7 @@ const copy = {
                   class="group flex items-center gap-4 rounded-lg border border-border/70 bg-card/60 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-soft hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-sm sm:p-6"
                   aria-label="Telegram"
                 >
-                  <Send class="w-6 h-6 flex-shrink-0 text-strong group-hover:text-foreground transition-colors" />
+                  <BrandIcon name="telegram" class="h-6 w-6 flex-shrink-0 text-strong transition-colors group-hover:text-foreground" />
                   <span class="text-sm font-semibold text-foreground">Telegram</span>
                 </a>
               </div>
@@ -692,139 +590,10 @@ const copy = {
 
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-border/70 bg-background px-5 py-12 sm:px-8">
-      <div class="mx-auto max-w-6xl">
-        <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
-          <p class="text-sm font-light text-body" data-en={copy.en.copyright} data-km={copy.km.copyright}>{copy.en.copyright}</p>
-          <div class="flex gap-8 text-sm font-light text-body">
-            <a href="#" class="transition-colors hover:text-foreground" data-en={copy.en.privacy} data-km={copy.km.privacy}>{copy.en.privacy}</a>
-            <a href="#" class="transition-colors hover:text-foreground" data-en={copy.en.terms} data-km={copy.km.terms}>{copy.en.terms}</a>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <SiteFooter />
   </div>
 
   <script>
-    type Language = 'en' | 'km';
-
-    const root = document.documentElement;
-    const languageToggle = document.querySelector<HTMLButtonElement>('#language-toggle');
-    const languageIndicator = document.querySelector<HTMLElement>('#language-indicator');
-    const englishLabel = document.querySelector<HTMLElement>('#language-en');
-    const khmerLabel = document.querySelector<HTMLElement>('#language-km');
-
-    const STORAGE_KEY = 'preferred-language';
-
-    const rememberLanguage = (language: Language) => {
-      try {
-        localStorage.setItem(STORAGE_KEY, language);
-      } catch {
-        // Storage can be unavailable (private mode, blocked cookies) — the toggle still works.
-      }
-    };
-
-    const storedLanguage = (): Language | null => {
-      try {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        return stored === 'en' || stored === 'km' ? stored : null;
-      } catch {
-        return null;
-      }
-    };
-
-    const setLanguage = (language: Language) => {
-      root.lang = language;
-      document.querySelectorAll<HTMLElement>('[data-en][data-km]').forEach((element) => {
-        element.textContent = element.dataset[language] ?? '';
-      });
-      document.querySelectorAll<HTMLElement>('[data-aria-en][data-aria-km]').forEach((element) => {
-        element.setAttribute('aria-label', element.dataset[`aria${language === 'en' ? 'En' : 'Km'}`] ?? '');
-      });
-      languageToggle?.setAttribute('aria-checked', String(language === 'km'));
-      languageIndicator?.classList.toggle('translate-x-full', language === 'km');
-      languageIndicator?.classList.toggle('translate-x-0', language === 'en');
-      englishLabel?.classList.toggle('text-background', language === 'en');
-      englishLabel?.classList.toggle('text-muted-foreground', language === 'km');
-      khmerLabel?.classList.toggle('text-background', language === 'km');
-      khmerLabel?.classList.toggle('text-muted-foreground', language === 'en');
-    };
-
-    const navLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]')];
-    const sections = navLinks
-      .map((link) => document.getElementById(link.dataset.navLink ?? ''))
-      .filter((section): section is HTMLElement => Boolean(section));
-
-    const updateActiveNav = () => {
-      // The last section is shorter than the remaining scroll room, so its top never
-      // reaches the 100px line — without this the nav still reads "Projects" when you
-      // are looking at Contact at the very bottom of the page.
-      // `scrollY > 0` guards the case where the whole page fits on screen: without it
-      // the last link would be highlighted while you are looking at the top.
-      const atBottom =
-        window.scrollY > 0 &&
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-
-      let activeSection = atBottom ? sections[sections.length - 1]?.id : sections[0]?.id;
-      if (!atBottom) {
-        for (const section of sections) {
-          if (section.getBoundingClientRect().top <= 100) activeSection = section.id;
-        }
-      }
-      for (const link of navLinks) {
-        const active = link.dataset.navLink === activeSection;
-        link.classList.toggle('text-foreground', active);
-        link.classList.toggle('text-muted-foreground', !active);
-        link.classList.toggle('is-active', active);
-      }
-    };
-
-    // Coalesce to one recalculation per frame — scroll fires far faster than paint.
-    let navFrame = 0;
-    const scheduleNavUpdate = () => {
-      if (navFrame) return;
-      navFrame = requestAnimationFrame(() => {
-        navFrame = 0;
-        updateActiveNav();
-      });
-    };
-
-    window.addEventListener('scroll', scheduleNavUpdate, { passive: true });
-
-    if (root.dataset.reveal !== undefined) {
-      const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal-item]');
-
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            for (const entry of entries) {
-              if (!entry.isIntersecting) continue;
-              entry.target.classList.add('is-revealed');
-              observer.unobserve(entry.target);
-            }
-          },
-          // Fire a little before the element is fully in view, so the motion has
-          // finished by the time it reaches comfortable reading position.
-          { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
-        );
-        revealItems.forEach((item) => observer.observe(item));
-      } else {
-        delete root.dataset.reveal;
-      }
-    }
-
-    languageToggle?.addEventListener('click', () => {
-      const language = root.lang === 'km' ? 'en' : 'km';
-      setLanguage(language);
-      rememberLanguage(language);
-      // Swapping copy reflows every section, so the active link must be recomputed —
-      // no scroll event fires on its own.
-      updateActiveNav();
-    });
-
-    const preferred = storedLanguage();
-    if (preferred && preferred !== root.lang) setLanguage(preferred);
-    updateActiveNav();
+    import '../scripts/site';
   </script>
 </BaseLayout>

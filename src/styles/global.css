@@ -111,7 +111,9 @@
     letter-spacing: -0.025em;
   }
 
-  html[lang='en'] h2 {
+  /* .section-heading: the /projects/ page title, an h1 set at section-heading size. */
+  html[lang='en'] h2,
+  html[lang='en'] .section-heading {
     letter-spacing: -0.015em;
   }
 
@@ -199,3 +201,31 @@ html[lang='km'] .nav-link::after {
     transform: none;
   }
 }
+
+/* Project accordion (/projects/): animate <details> open and close. Browsers without
+   ::details-content drop this rule and toggle instantly; ones without
+   interpolate-size still open fine, just without the height transition. */
+@media (prefers-reduced-motion: no-preference) {
+  .project-accordion {
+    interpolate-size: allow-keywords;
+  }
+
+  .project-accordion::details-content {
+    height: 0;
+    overflow: clip;
+    transition:
+      height 0.5s var(--motion-ease),
+      content-visibility 0.5s var(--motion-ease) allow-discrete;
+  }
+
+  .project-accordion[open]::details-content {
+    height: auto;
+  }
+
+  /* Set for one frame by site.ts when it opens a #hash target, so the page can
+     scroll to the card at its full height instead of mid-animation. */
+  .project-accordion[data-instant]::details-content {
+    transition: none;
+  }
+}
+

@@ -1,0 +1,23 @@
+---
+import ProjectBody from './ProjectBody.astro';
+import { projectId, type Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  /** Position in the list; staggers the reveal of side-by-side entries. */
+  index: number;
+}
+
+const { project, index } = Astro.props;
+---
+
+<!-- The page's scroll-padding-top already clears the fixed header; scroll-mt only
+     adds breathing room so a jumped-to card doesn't sit flush against it. -->
+<article
+  id={projectId(project)}
+  data-reveal-item
+  style={`--reveal-delay: ${(index % 2) * 70}ms`}
+  class="group block scroll-mt-8 rounded-lg border border-border/60 bg-card/50 p-5 transition-[background-color,border-color,box-shadow,transform] duration-300 ease-soft hover:-translate-y-px hover:border-border hover:bg-card hover:shadow-[0_14px_40px_rgba(0,0,0,0.055)] sm:p-8"
+>
+  <ProjectBody project={project} />
+</article>

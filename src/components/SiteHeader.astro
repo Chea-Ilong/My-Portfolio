@@ -1,0 +1,80 @@
+---
+import { navItems, siteCopy } from '../data/site';
+
+interface Props {
+  /** Home links to its own sections and drives the scroll-spy; other pages link
+      back to `/#section` and mark `active` statically. */
+  page?: 'home' | 'projects';
+}
+
+const { page = 'home' } = Astro.props;
+const isHome = page === 'home';
+const active = isHome ? undefined : page;
+---
+
+<!-- Padding on the header, max-width on the nav: the same nesting every section
+     uses. Putting both on one element would make `max-w-6xl` border-box the
+     padding away, insetting the wordmark 32px from the content edge below. -->
+<header
+  class="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/85 px-5 backdrop-blur-md sm:px-8"
+>
+  <nav class="mx-auto flex h-20 max-w-6xl items-center justify-between">
+    <!-- Set to match the nav links exactly: same text-base, same inherited normal
+         weight, same colour transition. It only steps down to text-sm below sm,
+         where the links are hidden anyway and the full-size label wrapped onto
+         two lines inside the h-20 bar. -->
+    <a
+      href={isHome ? '#' : '/'}
+      class="whitespace-nowrap text-sm text-foreground transition-colors duration-300 ease-soft hover:text-muted-foreground sm:text-base"
+      data-en={siteCopy.en.role}
+      data-km={siteCopy.km.role}
+    >
+      {siteCopy.en.role}
+    </a>
+    <div class="flex items-center gap-4 lg:gap-7">
+      <div class="hidden items-center gap-6 md:flex lg:gap-7">
+        {navItems.map((item, index) => (
+          <a
+            href={isHome ? `#${item.section}` : `/#${item.section}`}
+            data-nav-link={isHome ? item.section : undefined}
+            data-en={item.label.en}
+            data-km={item.label.km}
+            class={`nav-link py-2 text-base transition-colors duration-300 ease-soft hover:text-foreground ${
+              (isHome ? index === 0 : item.section === active) ? 'text-foreground is-active' : 'text-muted-foreground'
+            }`}
+          >
+            {item.label.en}
+          </a>
+        ))}
+      </div>
+      <button
+        id="language-toggle"
+        type="button"
+        role="switch"
+        aria-checked="false"
+        aria-label={siteCopy.en.languageLabel}
+        data-aria-en={siteCopy.en.languageLabel}
+        data-aria-km={siteCopy.km.languageLabel}
+        class="relative grid h-10 w-32 grid-cols-2 rounded-lg border border-border bg-card p-0.5"
+      >
+        <span
+          id="language-indicator"
+          aria-hidden="true"
+          class="absolute inset-y-0.5 left-0.5 w-[calc(50%-2px)] translate-x-0 rounded-md bg-foreground transition-transform duration-300 ease-soft"
+        />
+        <span
+          id="language-en"
+          class="relative z-10 flex items-center justify-center rounded-md text-sm font-medium leading-none text-background transition-colors duration-300 ease-soft"
+        >
+          English
+        </span>
+        <span
+          id="language-km"
+          class="relative z-10 flex items-center justify-center rounded-md text-sm font-medium leading-none text-muted-foreground transition-colors duration-300 ease-soft"
+        >
+          ខ្មែរ
+        </span>
+      </button>
+    </div>
+  </nav>
+</header>

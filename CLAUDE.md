@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Personal portfolio for Chea Ilong at https://cheailong.dev — a single static page built with Astro 7 + Tailwind CSS v4. There is no backend, no CMS, no test framework, and no linter. It was migrated from Next.js (commit `b9950d0`); `scripts/check.mjs` still asserts that no `/_next/` assets leak into the build.
+Personal portfolio for Chea Ilong at https://cheailong.dev — a static site built with Astro 7 + Tailwind CSS v4. There is no backend, no CMS, no test framework, and no linter. It was migrated from Next.js (commit `b9950d0`); `scripts/check.mjs` still asserts that no `/_next/` assets leak into the build.
 
 ## Commands
 
@@ -15,7 +15,7 @@ npm run check    # astro check (types), build, then assert on the built HTML
 npm run preview  # serve dist/
 ```
 
-`npm run check` is the only verification gate — run it after any change to `index.astro`, `BaseLayout.astro`, `global.css`, `robots.txt`, or `sitemap.xml`. It runs three stages:
+`npm run check` is the only verification gate — run it after any change to a page, component, `src/data/*`, `BaseLayout.astro`, `global.css`, `robots.txt`, or `sitemap.xml`. It runs three stages:
 
 1. `astro check` — the only thing that type-checks `.astro` frontmatter. `astro build` strips types without checking them, so skipping this lets a typo'd `copy.en.*` reference ship as a silently empty element.
 2. `astro build`.
@@ -25,17 +25,27 @@ Adding an assertion there is how you make an invariant enforceable — it is the
 
 ## Architecture
 
-Everything renders from **`src/pages/index.astro`** (~700 lines). The frontmatter holds all site content as typed const arrays — `navItems`, `experiences`, `projects`, `skills`, and a `copy` object of UI strings. Content edits are data edits in that frontmatter, not template edits. Section markup is inlined in the same file; the only extracted component is `BrandIcon.astro` (GitHub/LinkedIn SVGs, since `@lucide/astro` has no brand icons). Everything else uses `@lucide/astro` imports.
+Two pages: **`src/pages/index.astro`** (the one-page portfolio) and **`src/pages/projects.astro`** (`/projects/`, every project). The home page shows only the first `homeProjectCount` projects and ends the section with a "See more" link to `/projects/`.
 
-`src/layouts/BaseLayout.astro` owns `<head>` in full: meta tags, Open Graph, Twitter cards, favicons, and two JSON-LD schema objects (`Person` + `WebSite`) built from a local `siteUrl` const. SEO is a primary concern of this repo — the `Person` schema carries name variants, `knowsAbout`, and `sameAs` links, and the site URL is hardcoded in three places (`astro.config.mjs`, `BaseLayout.astro`, `public/robots.txt` + `public/sitemap.xml`) that must stay in sync.
+Content is data, not markup:
+
+- `src/data/projects.ts` — the `projects` array (with its image imports) and `homeProjectCount`. Order matters: the first N are what the home page shows.
+- `src/data/site.ts` — `navItems` and `siteCopy`, the UI strings shared across pages (header, footer, projects page).
+- `index.astro` frontmatter — everything only the home page uses: `internships`, `experiences` (shown as "Volunteer Experience"), `skills`, `heroSocials`, and a `copy` object of home-page strings.
+
+Shared markup lives in `src/components/`: `SiteHeader` (nav + language toggle; `page="home"` links to `#section` and drives the scroll-spy, other pages link to `/#section` and mark their nav item statically), `SiteFooter`, `ProjectBody` (a project's image + write-up), which renders inside both `ProjectCard` (the full card on the home page) and `ProjectAccordion` (a native `<details>` row on `/projects/`; `site.ts` opens the one a `#hash` targets), and `BrandIcon` (GitHub/LinkedIn/Telegram SVGs, since `@lucide/astro` has no brand icons). Everything else uses `@lucide/astro` imports. The client script (language toggle, scroll-spy, scroll reveal) is `src/scripts/site.ts`, imported by each page.
+
+A new page needs: `<SiteHeader page=…>`, `<SiteFooter />`, the `site.ts` script import, a `path` prop on `BaseLayout` (for its canonical/og:url), an entry in `public/sitemap.xml`, and a block in `scripts/check.mjs`'s per-page loop.
+
+`src/layouts/BaseLayout.astro` owns `<head>` in full, with optional `path`/`title`/`description` props per page: meta tags, Open Graph, Twitter cards, favicons, and two JSON-LD schema objects (`Person` + `WebSite`) built from a local `siteUrl` const. SEO is a primary concern of this repo — the `Person` schema carries name variants, `knowsAbout`, and `sameAs` links, and the site URL is hardcoded in three places (`astro.config.mjs`, `BaseLayout.astro`, `public/robots.txt` + `public/sitemap.xml`) that must stay in sync.
 
 ### Bilingual (EN/KM) toggle — the main constraint
 
-There are no i18n routes. The page renders **English text into the DOM**, and the inline `<script>` at the bottom of `index.astro` swaps it client-side:
+There are no i18n routes. Each page renders **English text into the DOM**, and `src/scripts/site.ts` swaps it client-side:
 
 - Every translatable element carries `data-en` and `data-km` attributes, with the English value also as its inner text.
 - Toggling calls `element.textContent = element.dataset[language]` on every `[data-en][data-km]` node, and sets `aria-label` from `[data-aria-en][data-aria-km]` nodes.
-- `document.documentElement.lang` is the source of truth for current language; there is no persistence across reloads.
+- `document.documentElement.lang` is the source of truth for current language; the choice is remembered in `localStorage` so it carries across pages and reloads.
 
 Consequences when editing markup:
 

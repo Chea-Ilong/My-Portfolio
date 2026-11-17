@@ -1,0 +1,84 @@
+---
+import { Image } from 'astro:assets';
+import { ExternalLink } from '@lucide/astro';
+import BrandIcon from './BrandIcon.astro';
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  /** Year, title and highlight. Off when a collapsible row's summary already shows them. */
+  withHeading?: boolean;
+}
+
+const { project, withHeading = true } = Astro.props;
+// Image first in the source so it stacks on top on mobile; from md up it sits on the right.
+const frameClass = 'relative h-56 overflow-hidden rounded-md border border-border/60 bg-muted/20 sm:h-72 lg:h-80 md:order-2';
+---
+
+<div class="grid items-center gap-8 md:grid-cols-2 lg:gap-12">
+  {project.live ? (
+    <a
+      href={project.live}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Open the live ${project.title} project`}
+      data-aria-en={`Open the live ${project.title} project`}
+      data-aria-km={`បើកគម្រោង ${project.title}`}
+      class={`group/image ${frameClass}`}
+    >
+      <Image
+        src={project.image}
+        alt={project.title}
+        widths={[600, 1200]}
+        sizes="(max-width: 768px) 100vw, 600px"
+        class="h-full w-full object-cover transition-transform duration-500 ease-soft group-hover/image:scale-[1.015]"
+        loading="lazy"
+      />
+      <span class="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-md border border-white/30 bg-black/65 text-white opacity-0 transition-opacity duration-300 ease-soft group-hover/image:opacity-100 group-focus-visible/image:opacity-100">
+        <ExternalLink class="h-4 w-4" />
+      </span>
+    </a>
+  ) : (
+    <div class={frameClass}>
+      <Image
+        src={project.image}
+        alt={project.title}
+        widths={[600, 1200]}
+        sizes="(max-width: 768px) 100vw, 600px"
+        class="h-full w-full object-cover"
+        loading="lazy"
+      />
+    </div>
+  )}
+
+  <div class="space-y-6 md:order-1">
+    {withHeading && (
+      <>
+        <p class="text-xs font-medium uppercase tabular-nums text-muted-foreground">{project.year}</p>
+        <h3 class="text-3xl font-semibold text-foreground sm:text-4xl">{project.title}</h3>
+      </>
+    )}
+    <p class="text-base leading-relaxed text-body" data-en={project.description} data-km={project.descriptionKm}>{project.description}</p>
+    <div class="flex flex-wrap gap-3">
+      {project.tags.map((tag) => (
+        <span class="rounded-md border border-border/70 bg-transparent px-2.5 py-1 text-xs font-normal text-muted-foreground">
+          {tag}
+        </span>
+      ))}
+    </div>
+    <div class={`flex items-center gap-4 pt-4 ${withHeading ? 'justify-between' : 'justify-end'}`}>
+      {withHeading && (
+        <p class="text-sm font-semibold text-strong" data-en={project.highlights} data-km={project.highlightsKm}>{project.highlights}</p>
+      )}
+      <a
+        href={project.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex shrink-0 items-center gap-1.5 text-sm font-semibold text-foreground transition-opacity duration-300 ease-soft hover:opacity-60"
+      >
+        <BrandIcon name="github" class="h-4 w-4" />
+        GitHub
+      </a>
+    </div>
+  </div>
+</div>

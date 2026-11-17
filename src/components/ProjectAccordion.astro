@@ -1,0 +1,44 @@
+---
+import { ChevronDown } from '@lucide/astro';
+import ProjectBody from './ProjectBody.astro';
+import { projectId, type Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+---
+
+<!-- A native <details>: it opens and closes without JS, and the collapsed content
+     is still in the HTML for crawlers. site.ts opens the one a #hash points at, so
+     the home page's "See more" lands on an open card. The height animation is the
+     `.project-accordion` rule in global.css. -->
+<details
+  id={projectId(project)}
+  data-reveal-item
+  style={`--reveal-delay: ${Math.min(index, 6) * 40}ms`}
+  class="project-accordion group/card scroll-mt-8 rounded-lg border border-border/60 bg-card/50 transition-[background-color,border-color,box-shadow] duration-300 ease-soft hover:border-border hover:bg-card open:border-border open:bg-card open:shadow-[0_14px_40px_rgba(0,0,0,0.055)]"
+>
+  <summary
+    class="flex cursor-pointer list-none items-center gap-4 rounded-lg p-5 outline-offset-4 sm:gap-8 sm:px-8 sm:py-6 [&::-webkit-details-marker]:hidden"
+  >
+    <span class="w-10 shrink-0 text-xs font-medium tabular-nums text-muted-foreground">{project.year}</span>
+    <span class="min-w-0 flex-1 space-y-1">
+      <h3 class="text-xl font-semibold text-foreground sm:text-2xl">{project.title}</h3>
+      <p class="text-sm text-strong" data-en={project.highlights} data-km={project.highlightsKm}>{project.highlights}</p>
+    </span>
+    <span class="hidden flex-wrap justify-end gap-2 lg:flex lg:max-w-xs">
+      {project.tags.slice(0, 3).map((tag) => (
+        <span class="rounded-md border border-border/70 px-2 py-0.5 text-xs text-muted-foreground">{tag}</span>
+      ))}
+    </span>
+    <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border text-strong transition-[background-color,color,border-color] duration-300 ease-soft group-hover/card:border-foreground/25 group-open/card:bg-foreground group-open/card:text-background">
+      <ChevronDown class="h-4 w-4 transition-transform duration-300 ease-soft group-open/card:rotate-180" />
+    </span>
+  </summary>
+  <div class="border-t border-border/60 p-5 sm:p-8">
+    <ProjectBody project={project} withHeading={false} />
+  </div>
+</details>

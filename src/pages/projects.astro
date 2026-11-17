@@ -1,0 +1,62 @@
+---
+import { ArrowLeft } from '@lucide/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectAccordion from '../components/ProjectAccordion.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { projects } from '../data/projects';
+import { siteCopy } from '../data/site';
+---
+
+<BaseLayout
+  path="/projects/"
+  title="Projects | Chea Ilong, Full-Stack Developer in Cambodia"
+  description={`Projects by Chea Ilong: ${projects.map((project) => project.title).join(', ')}.`}
+>
+  <div class="min-h-screen overflow-x-clip bg-background text-foreground antialiased">
+    <main>
+      <SiteHeader page="projects" />
+
+      <section class="bg-muted/20 px-5 pb-24 pt-36 sm:px-8 sm:pb-32 sm:pt-40">
+        <div class="mx-auto max-w-6xl">
+          <div class="space-y-14">
+            <div class="space-y-6 text-center" data-reveal-item>
+              <a
+                href="/"
+                class="group inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-300 ease-soft hover:text-foreground"
+              >
+                <ArrowLeft class="h-4 w-4 transition-transform duration-300 ease-soft group-hover:-translate-x-0.5" />
+                <span data-en={siteCopy.en.backHome} data-km={siteCopy.km.backHome}>{siteCopy.en.backHome}</span>
+              </a>
+              <h1
+                class="section-heading text-4xl font-normal text-foreground sm:text-5xl"
+                data-en={siteCopy.en.allProjects}
+                data-km={siteCopy.km.allProjects}
+              >
+                {siteCopy.en.allProjects}
+              </h1>
+              <p
+                class="mx-auto max-w-xl text-base leading-relaxed text-body"
+                data-en={siteCopy.en.allProjectsDescription}
+                data-km={siteCopy.km.allProjectsDescription}
+              >
+                {siteCopy.en.allProjectsDescription}
+              </p>
+            </div>
+            <div class="space-y-4">
+              {projects.map((project, index) => (
+                <ProjectAccordion project={project} index={index} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <SiteFooter />
+  </div>
+
+  <script>
+    import '../scripts/site';
+  </script>
+</BaseLayout>

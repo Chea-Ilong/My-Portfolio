@@ -1,0 +1,15 @@
+---
+import { siteCopy } from '../data/site';
+---
+
+<footer class="border-t border-border/70 bg-background px-5 py-12 sm:px-8">
+  <div class="mx-auto max-w-6xl">
+    <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
+      <p class="text-sm font-light text-body" data-en={siteCopy.en.copyright} data-km={siteCopy.km.copyright}>{siteCopy.en.copyright}</p>
+      <div class="flex gap-8 text-sm font-light text-body">
+        <a href="#" class="transition-colors hover:text-foreground" data-en={siteCopy.en.privacy} data-km={siteCopy.km.privacy}>{siteCopy.en.privacy}</a>
+        <a href="#" class="transition-colors hover:text-foreground" data-en={siteCopy.en.terms} data-km={siteCopy.km.terms}>{siteCopy.en.terms}</a>
+      </div>
+    </div>
+  </div>
+</footer>
